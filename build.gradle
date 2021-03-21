@@ -1,12 +1,12 @@
 plugins {
-    id("org.jetbrains.kotlin.jvm") version "1.4.30"
-    id("org.jetbrains.kotlin.kapt") version "1.4.30"
-    id("org.jetbrains.kotlin.plugin.allopen") version "1.4.30"
-    id("com.github.johnrengelman.shadow") version "6.1.0"
+    id("org.jetbrains.kotlin.jvm") version "1.4.31"
+    id("org.jetbrains.kotlin.kapt") version "1.4.31"
+    id("org.jetbrains.kotlin.plugin.allopen") version "1.4.31"
     id("io.micronaut.application") version "1.4.2"
+    id("com.github.johnrengelman.shadow") version "6.1.0"
 }
 
-version = "0.1"
+version = "0.0.1"
 group = "com.github.ottx96"
 
 repositories {
@@ -39,7 +39,7 @@ dependencies {
 
 
 application {
-    mainClass.set("com.github.ottx96.DiffviewGitCommand")
+    mainClass.set("com.github.ottx96.Entrypoint")
 }
 java {
     sourceCompatibility = JavaVersion.toVersion("11")
@@ -56,6 +56,4 @@ tasks {
             jvmTarget = "11"
         }
     }
-
-
 }

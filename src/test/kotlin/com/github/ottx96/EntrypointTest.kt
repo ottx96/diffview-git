@@ -8,7 +8,7 @@ import java.io.PrintStream
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions
 
-class DiffviewGitCommandTest {
+class EntrypointTest {
 
     @Test
     fun testWithCommandLineOption() {
@@ -17,7 +17,7 @@ class DiffviewGitCommandTest {
         System.setOut(PrintStream(baos))
 
         val args = arrayOf("-v")
-        PicocliRunner.run(DiffviewGitCommand::class.java, ctx, *args)
+        PicocliRunner.run(Entrypoint::class.java, ctx, *args)
 
         Assertions.assertTrue(baos.toString().contains("Hi!"))
 
