@@ -8,7 +8,7 @@ on:
   push:
     branches: [ master ]
   pull_request:
-    branches: *
+    branches: [ master ]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -27,6 +27,14 @@ jobs:
           java-version: 11
           graalvm-version: 21.0.0.2
           native-image: true
-      - run: |
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew assemble --info
+      - name: Build Native Image
+        run: |
+          java -version
+          native-image -cp "build/layers/libs/*.jar:build/layers/resources/*:build/layers/application.jar" com.github.ottx96.Entrypoint
           java -version
           native-image --help
+          
