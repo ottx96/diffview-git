@@ -34,7 +34,4 @@ jobs:
       - name: Build Native Image
         run: |
           java -version
-          native-image -cp "build/layers/libs/*.jar:build/layers/resources/*:build/layers/application.jar" com.github.ottx96.Entrypoint
-          java -version
-          native-image --help
-          
+          native-image -cp "build/layers/libs/*.jar:build/layers/resources/*:build/layers/application.jar" com.github.ottx96.Entrypoint         
