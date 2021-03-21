@@ -19,7 +19,7 @@ class EntrypointTest {
         val args = arrayOf("-v")
         PicocliRunner.run(Entrypoint::class.java, ctx, *args)
 
-        Assertions.assertTrue(baos.toString().contains("Hi!"))
+        Assertions.assertTrue(baos.toString().contains(Regex("""Hello, colored world!""")))
 
         ctx.close()
     }
