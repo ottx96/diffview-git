@@ -2,6 +2,7 @@ package com.github.ottx96
 
 import com.github.ottx96.logging.Colors
 import com.github.ottx96.logging.Styles
+import com.github.ottx96.system.ShellCommandExecutor
 import io.micronaut.configuration.picocli.PicocliRunner
 import picocli.CommandLine.*
 import java.io.File
@@ -12,8 +13,15 @@ import java.io.File
 )
 class Entrypoint : Runnable {
 
-    @Option(names = ["-v", "--verbose"], description = ["Sets the output to verbose."])
-    private var verbose: Boolean = false
+    companion object {
+        @Option(names = ["-v", "--verbose"], description = ["Sets the output to verbose."])
+        var verbose: Boolean = false
+
+        @JvmStatic
+        fun main(args: Array<String>) {
+            PicocliRunner.run(Entrypoint::class.java, *args)
+        }
+    }
 
     @Option(names = ["-d", "--directory-in"], description = ["Sets the directory root to read from.", "Has to be inside of a valid git repository."],
         showDefaultValue = Help.Visibility.ALWAYS, defaultValue = "",
@@ -31,12 +39,9 @@ class Entrypoint : Runnable {
     override fun run() {
         (Styles.BOLD withStyle Styles.UNDERLINE withStyle Styles.REVERSE withColor Colors.GREEN)
             .println("Hello, Formatted World!")
-    }
 
-    companion object {
-        @JvmStatic
-        fun main(args: Array<String>) {
-            PicocliRunner.run(Entrypoint::class.java, *args)
+        files.forEach {
+            println(ShellCommandExecutor(inputDirectory, it).execute())
         }
     }
 }
