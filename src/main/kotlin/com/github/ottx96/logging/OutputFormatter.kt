@@ -18,7 +18,7 @@ enum class Styles {
 }
 
 enum class Colors {
-    BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE
+    BLACK, RED, GREEN, YELLOW, BLUE, MAGENTA, CYAN, WHITE, NONE
 }
 
 data class OutputFormatStyle(var styles: List<Styles> = mutableListOf()) {
@@ -40,9 +40,9 @@ data class OutputFormatColor(val color: Colors = Colors.WHITE) {
 
 data class OutputFormat(val style: OutputFormatStyle = OutputFormatStyle(), val color: OutputFormatColor = OutputFormatColor()) {
     fun format(text: String): String {
-        return CommandLine.Help.Ansi.ON.string(String.format("@|${style.styles.joinToString(separator = ","){it.name}},${color.color.name} %s|@", text))
+        return CommandLine.Help.Ansi.ON.string(String.format("@|${style.styles.joinToString(separator = ","){it.name}},${if(color.color == Colors.NONE) "" else color.color.name} %s|@", text))
     }
-    fun println(text: String) {
-        kotlin.io.println(format(text))
+    fun println(text: Any) {
+        kotlin.io.println(format("$text"))
     }
 }
