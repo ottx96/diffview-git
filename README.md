@@ -1,9 +1,15 @@
 ## A simple `git diff` to html converter
+
 This Project is meant to be run as CLI Application.  
 I'll provide a `Dockerfile` to build your own images using `GraalVM native images`.
 
 Also, I'll provide another shellscript, which creates a container with a running webserver.  
-So you can directly 
+So you can directly see the formatted diff locally.
+
+[![Gradle Build](https://github.com/ottx96/diffview-git/actions/workflows/shadow-jar.yml/badge.svg)](https://github.com/ottx96/diffview-git/actions/workflows/shadow-jar.yml)
+[![Native Image](https://github.com/ottx96/diffview-git/actions/workflows/native-image.yml/badge.svg)](https://github.com/ottx96/diffview-git/actions/workflows/native-image.yml)
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=ottx96/diffview-git)](https://dependabot.com)
+
 
 ## Usage
 ```text
