@@ -16,10 +16,10 @@ class EntrypointTest {
         val baos = ByteArrayOutputStream()
         System.setOut(PrintStream(baos))
 
-        val args = arrayOf("-v")
+        val args = arrayOf("README.md")
         PicocliRunner.run(Entrypoint::class.java, ctx, *args)
 
-        Assertions.assertTrue(baos.toString().contains(Regex("""Hello, colored world!""")))
+        Assertions.assertTrue(baos.toString().contains(Regex("""Hello, Formatted World!""")))
 
         ctx.close()
     }
