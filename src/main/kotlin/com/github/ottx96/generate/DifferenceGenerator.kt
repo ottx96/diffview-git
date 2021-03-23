@@ -15,7 +15,7 @@ class DifferenceGenerator(val data: DifferenceView) {
     }
 
     private fun generateHTML() {
-        TODO()
+
     }
 
 }
