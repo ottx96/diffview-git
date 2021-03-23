@@ -13,11 +13,21 @@ So you can directly see the formatted diff locally.
 
 ## Usage
 ```text
-Usage: diffview-git [-hvV]
-...
-  -h, --help      Show this help message and exit.
-  -v, --verbose   ...
-  -V, --version   Print version information and exit.
+Usage: diffview [-hvV] [-d[=<inputDirectory>]] [-o[=<outputDirectory>]]
+                <files>...
+      <files>...   The file whose history/diffviews to generate.
+  -d, --directory-in[=<inputDirectory>]
+                   Sets the directory root to read from.
+                   Has to be inside of a valid git repository.
+                     Default:
+  -h, --help       Show this help message and exit.
+  -o, --directory-out[=<outputDirectory>]
+                   Sets the directory to output .html files to.
+                   Files wll be created as [file name].html
+                   e.g.: README.md.html
+                     Default: diffview-generated/
+  -v, --verbose    Sets the output to verbose.
+  -V, --version    Print version information and exit.
 ```
 
 ### Convert to html using java
