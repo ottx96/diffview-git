@@ -1,5 +1,6 @@
 package com.github.ottx96.generate
 
+import com.github.ottx96.Entrypoint.Companion.debug
 import com.github.ottx96.Entrypoint.Companion.verbose
 import com.github.ottx96.logging.Colors
 import com.github.ottx96.logging.Styles
@@ -37,6 +38,14 @@ class DifferenceGenerator(val data: List<DifferenceView>) {
 
         // create comparisons
         val comparisons = mutableListOf<String>()
+
+        debug {
+            data.reversed().forEach {
+                File("build/new.txt").writeText(it.new.lines.joinToString("\n"))
+                File("build/old.txt").writeText(it.old.lines.joinToString("\n"))
+                File("build/unified.txt").writeText(it.unified.entries.joinToString(separator = "\n") { "${it.key} = ${it.value}" })
+            }
+        }
 
         data.forEach {
             verbose {

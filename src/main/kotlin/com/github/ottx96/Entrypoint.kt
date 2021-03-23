@@ -18,10 +18,16 @@ class Entrypoint : Runnable {
     companion object {
         @Option(names = ["-v", "--verbose"], description = ["Sets the output to verbose."])
         var verbose: Boolean = false
+        @Option(names = ["--debug"], description = ["Sets the output to debug."])
+        var debug: Boolean = false
 
-        fun verbose(f: () -> Unit) {
-            if(!verbose) return
-            f()
+        fun verbose(func: () -> Unit) {
+            if(!verbose && !debug) return
+            func()
+        }
+        fun debug(func: () -> Unit) {
+            if(!debug) return
+            func()
         }
 
         @JvmStatic

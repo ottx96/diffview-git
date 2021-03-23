@@ -13,13 +13,14 @@ So you can directly see the formatted diff locally.
 
 ## Usage
 ```text
-Usage: diffview [-hvV] [-d[=<inputDirectory>]] [-o[=<outputDirectory>]]
-                <files>...
+Usage: diffview [-hvV] [--debug] [-d[=<inputDirectory>]] [-o
+                [=<outputDirectory>]] <files>...
       <files>...   The file whose history/diffviews to generate.
   -d, --directory-in[=<inputDirectory>]
                    Sets the directory root to read from.
                    Has to be inside of a valid git repository.
                      Default:
+      --debug      Sets the output to debug.
   -h, --help       Show this help message and exit.
   -o, --directory-out[=<outputDirectory>]
                    Sets the directory to output .html files to.
