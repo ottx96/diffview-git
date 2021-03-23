@@ -37,10 +37,18 @@ Run the following command inside of a git repository.
 ### Convert to html using Docker
 
 #### Build the Container
-`docker build -t "diffview:latest" .`
+`docker build -t "diffview:latest" .`  
+or  
+`gradlew buildDockerImage`
 
 #### Run the Container
 `docker run --rm -v "[path/to/repo]:/git" diffview [..arguments]`
 
 Example:    
 `docker run --rm -v "$(pwd):/git" diffview README.md src/main/resources/logback.xml`
+
+## Roadmap
+- [ ] Add Paramter to limit the count of commits to display
+- [ ] Add Paramter to enlargen the displayed length of the file
+- [ ] Directly Serve the HTTP via Web Server (netty?) after converting the history
+- [ ] Add Parameter to auto-stop the Web Server (javascript / time limit)
