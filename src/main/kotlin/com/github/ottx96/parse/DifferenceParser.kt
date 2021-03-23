@@ -1,4 +1,4 @@
-package com.github.ottx96.convert
+package com.github.ottx96.parse
 
 import com.github.ottx96.Entrypoint
 import com.github.ottx96.logging.Colors
@@ -25,7 +25,6 @@ class DifferenceParser(private val input: String) {
             verbose {(Styles.ITALIC withColor Colors.WHITE).println("Negative range: ${determineNegativeRange(hunkID)}, Positive range: ${determinePositiveRange(hunkID)}")}
             val negativeHunk = DifferenceView.FileHunk(determineNegativeRange(hunkID))
             val positiveHunk = DifferenceView.FileHunk(determinePositiveRange(hunkID))
-            val differenceView = DifferenceView(negativeHunk, positiveHunk)
 
             // Populate Lines
             lines.forEachIndexed { i, string ->
@@ -38,6 +37,8 @@ class DifferenceParser(private val input: String) {
                     }
                 }
             }
+
+            val differenceView = DifferenceView("", "", negativeHunk, positiveHunk)
 
             verbose {
                 println(differenceView)
@@ -61,18 +62,19 @@ class DifferenceParser(private val input: String) {
     }
 }
 
-data class DifferenceView(val old: FileHunk, val new: FileHunk) {
+data class DifferenceView(val commit: String, val name: String, val old: FileHunk, val new: FileHunk, val unified:MutableMap<Int, FileHunk.IdentifiableLine> = mutableMapOf()) {
+
+    init {
+        old.lines.forEach { unified[it.index] = it }
+        new.lines.forEach { unified[it.index] = it }
+    }
+
     data class FileHunk(val range: IntRange, var lines: List<IdentifiableLine> = listOf()){
         data class IdentifiableLine(val index: Int, val marked: Boolean, val value: String)
     }
 
     override fun toString(): String {
-        val unified = mutableMapOf<Int, FileHunk.IdentifiableLine>()
         var result = ""
-
-        old.lines.forEach { unified[it.index] = it }
-        new.lines.forEach { unified[it.index] = it }
-
         unified.entries.sortedBy { it.key }.forEach {
             when {
                 !it.value.marked -> result += (Styles.BOLD withColor Colors.NONE).format(" \t${it.value.value}\n")
