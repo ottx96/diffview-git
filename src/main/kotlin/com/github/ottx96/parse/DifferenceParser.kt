@@ -35,7 +35,7 @@ class DifferenceParser(private val input: String) {
                 }
             }
 
-            val differenceView = DifferenceView("", "", negativeHunk, positiveHunk)
+            val differenceView = DifferenceView("4b19a6f8dca690048c20c7050019b0b25d1a1e56", "README.md", negativeHunk, positiveHunk)
 
             verbose {
                 println(differenceView)

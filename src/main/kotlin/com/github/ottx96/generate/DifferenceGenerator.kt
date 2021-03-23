@@ -11,6 +11,10 @@ enum class GenerationFormat {
     HTML
 }
 
+enum class RowType(val classname: String, val icon: String) {
+    NEUTRAL("row", "⚪"), ADDED("row-created", "🟢"), REMOVED("row-removed", "🔴")
+}
+
 class DifferenceGenerator(val data: List<DifferenceView>) {
 
     companion object {
@@ -35,21 +39,26 @@ class DifferenceGenerator(val data: List<DifferenceView>) {
         val comparisons = mutableListOf<String>()
 
         data.forEach {
-            (Styles.BOLD withColor Colors.MAGENTA).println("Generating HTML for commit ${it.commit}..")
             verbose {
+                (Styles.ITALIC withColor Colors.WHITE).println("Generating HTML for commit ${it.commit}..")
                 (Styles.ITALIC withColor Colors.WHITE).println("File name: ${it.name}")
                 (Styles.ITALIC withColor Colors.WHITE).println("File hunk old: ${it.old.range}")
                 (Styles.ITALIC withColor Colors.WHITE).println("File hunk new: ${it.new.range}")
             }
             // create rows for comparison
             val tableRows = mutableListOf<String>()
-            it.unified.forEach { (idx, data) ->
+
+            it.unified.toSortedMap().forEach{ (idx, data) ->
+                val new = it.new.lines.find { it.index == data.index }
+                val old = it.old.lines.find { it.index == data.index }
+                val type = if(new?.marked == true) RowType.ADDED else if(old?.marked == true) RowType.REMOVED else RowType.NEUTRAL
+
                 tableRows += rowTemplate
-                    .replace("@@line.class@@", "row") // TODO
-                    .replace("@@line.icon@@", "🟢") // TODO
-                    .replace("@@line.number.old@@", "${data.index}") // TODO
-                    .replace("@@line.number.new@@", "${data.index}") // TODO
-                    .replace("@@line.content@@", data.value)
+                    .replace("@@line.class@@", type.classname)
+                    .replace("@@line.icon@@", type.icon)
+                    .replace("@@line.number.old@@", it.old.lines.getLineNumber(data))
+                    .replace("@@line.number.new@@", it.new.lines.getLineNumber(data))
+                    .replace("@@line.content@@", "${data.value.replace(" ", "&nbsp;")}")
             }
 
         comparisons += comparisonTemplate
@@ -65,4 +74,10 @@ class DifferenceGenerator(val data: List<DifferenceView>) {
         if(!output.exists() || output.length() == 0L) throw IOException()
         return output
     }
+
+    private fun List<DifferenceView.FileHunk.IdentifiableLine>.getLineNumber(other: DifferenceView.FileHunk.IdentifiableLine): String {
+        val i = indexOf(other)
+        return if(i == -1) "" else "$i"
+    }
+
 }
