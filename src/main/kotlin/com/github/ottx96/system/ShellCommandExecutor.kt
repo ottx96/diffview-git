@@ -6,7 +6,7 @@ import com.github.ottx96.logging.Styles
 import java.io.File
 import java.util.concurrent.TimeUnit
 
-class ShellCommandExecutor(private val directory: File, private val file: File) {
+class ShellCommandExecutor(private val file: File, private val directory: File) {
 
     private val err: File = File.createTempFile("DIFFVIEW.", ".TMP")
     private val out: File = File.createTempFile("DIFFVIEW.", ".TMP")

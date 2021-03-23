@@ -1,5 +1,6 @@
 package com.github.ottx96
 
+import com.github.ottx96.convert.DifferenceParser
 import com.github.ottx96.logging.Colors
 import com.github.ottx96.logging.Styles
 import com.github.ottx96.system.ShellCommandExecutor
@@ -41,7 +42,11 @@ class Entrypoint : Runnable {
             .println("Hello, Formatted World!")
 
         files.forEach {
-            println(ShellCommandExecutor(inputDirectory, it).execute())
+            (Styles.BOLD withColor Colors.MAGENTA).println("Processing file ${it.absolutePath} ..")
+            val output = ShellCommandExecutor(it, inputDirectory).execute()
+            DifferenceParser(output).parse()
+            (Styles.BOLD withColor Colors.MAGENTA).println("Writing output file to ${it.absolutePath} ..")
+            // TODO
         }
     }
 }
