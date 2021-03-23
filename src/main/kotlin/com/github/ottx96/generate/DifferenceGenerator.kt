@@ -67,7 +67,13 @@ class DifferenceGenerator(val data: List<DifferenceView>) {
                     .replace("@@line.icon@@", type.icon)
                     .replace("@@line.number.old@@", it.old.lines.getLineNumber(data))
                     .replace("@@line.number.new@@", it.new.lines.getLineNumber(data))
-                    .replace("@@line.content@@", "${data.value.replace(" ", "&nbsp;")}")
+                    .replace("@@line.content@@",
+                "${data.value
+                            .replace(" ", "&nbsp;")
+                            .replace("<", "&lt;")
+                            .replace(">", "&gt;")
+                        }"
+                    )
             }
 
         comparisons += comparisonTemplate

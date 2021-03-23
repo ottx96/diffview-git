@@ -1,0 +1,1574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        * {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            color: #282c34;
+        }
+
+        .App {
+            background-color: #282c34;
+            min-height: 100vh;
+            max-width: 100%;
+            min-width: 100%;
+        }
+
+        .comparison {
+            padding-top: 5vh;
+            padding-bottom: 3vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .separator {
+            text-align: center;
+            color: #282c34;
+            width: 12%;
+            height: 4vh;
+            display: flex;
+            justify-items: center;
+            align-items: center;
+            background-color: white;
+            z-index: 0;
+        }
+
+        .separator p {
+            width: 100%;
+        }
+
+        h1 {
+            width: 100%;
+            margin-left: 6%;
+            color: white;
+            text-align: start;
+            font-family: 'Lucida Console', Courier, monospace
+        }
+
+        table {
+            background-color: white;
+            width: 95%;
+            display: flex;
+            justify-content: left;
+            align-items: center;
+            border-radius: 7px;
+            border: white 1px solid;
+            overflow: hidden;
+            box-shadow: 0 0 6px 1px black;
+            z-index: 1;
+        }
+
+        tbody {
+            padding-top: 5px;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .row *, .row-created *, .row-removed * {
+            word-break: break-all;
+        }
+
+        .row {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 255, 255, 0.8);
+        }
+
+        .row-created {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(0, 255, 0, 0.35);
+        }
+
+        .row-removed {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgba(255, 0, 0, 0.32);
+        }
+
+        .line-number, .line-number-deleted, .line-number-added {
+            color: #282c34;
+            font-size: 0.7rem;
+            width: 60px;
+            text-align: center;
+            border-right: #282c34 1px solid;
+        }
+
+        .line-icon {
+            font-size: 0.4rem;
+            width: 60px;
+            text-align: center;
+            border-right: #282c34 1px solid;
+        }
+
+        .context, .created, .deleted {
+            width: 100%;
+            margin-left: 2%;
+        }
+    </style>
+</head>
+<body>
+<div class="App">
+    <div class="comparison">
+        <h1>README.md (4b19a6f8dca690048c20c7050019b0b25d1a1e56)</h1>
+        <table>
+            <tbody>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">0</td>
+                <td class="line-number">0</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;companion&nbsp;object&nbsp;{</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">1</td>
+                <td class="line-number">1</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Option(names&nbsp;=&nbsp;["-v",&nbsp;"--verbose"],&nbsp;description&nbsp;=&nbsp;["Sets&nbsp;the&nbsp;output&nbsp;to&nbsp;verbose."])</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">2</td>
+                <td class="line-number">2</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;verbose:&nbsp;Boolean&nbsp;=&nbsp;false</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">3</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Option(names&nbsp;=&nbsp;["--debug"],&nbsp;description&nbsp;=&nbsp;["Sets&nbsp;the&nbsp;output&nbsp;to&nbsp;debug."])</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">4</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;debug:&nbsp;Boolean&nbsp;=&nbsp;false</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">3</td>
+                <td class="line-number">5</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">4</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;verbose(f:&nbsp;()&nbsp;-&gt;&nbsp;Unit)&nbsp;{</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">5</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!verbose)&nbsp;return</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">6</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f()</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">6</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;verbose(func:&nbsp;()&nbsp;-&gt;&nbsp;Unit)&nbsp;{</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">7</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!verbose&nbsp;&&&nbsp;!debug)&nbsp;return</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">8</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;func()</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">9</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">10</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;debug(func:&nbsp;()&nbsp;-&gt;&nbsp;Unit)&nbsp;{</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">11</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!debug)&nbsp;return</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">12</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;func()</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">7</td>
+                <td class="line-number">13</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">8</td>
+                <td class="line-number">14</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">9</td>
+                <td class="line-number">15</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@JvmStatic</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="comparison">
+        <h1>README.md (4b19a6f8dca690048c20c7050019b0b25d1a1e56)</h1>
+        <table>
+            <tbody>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">0</td>
+                <td class="line-number">0</td>
+                <td class="context">package&nbsp;com.github.ottx96</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">1</td>
+                <td class="line-number">1</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">2</td>
+                <td class="context">import&nbsp;com.github.ottx96.generate.DifferenceGenerator</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">2</td>
+                <td class="line-number">3</td>
+                <td class="context">import&nbsp;com.github.ottx96.parse.DifferenceParser</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">3</td>
+                <td class="line-number">4</td>
+                <td class="context">import&nbsp;com.github.ottx96.logging.Colors</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">4</td>
+                <td class="line-number">5</td>
+                <td class="context">import&nbsp;com.github.ottx96.logging.Styles</td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="separator">
+            <p>[...]</p>
+        </div>
+        <table>
+            <tbody>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">5</td>
+                <td class="line-number">6</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Option(names&nbsp;=&nbsp;["-v",&nbsp;"--verbose"],&nbsp;description&nbsp;=&nbsp;["Sets&nbsp;the&nbsp;output&nbsp;to&nbsp;verbose."])</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">6</td>
+                <td class="line-number">7</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;verbose:&nbsp;Boolean&nbsp;=&nbsp;false</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">7</td>
+                <td class="line-number">8</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">9</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;verbose(f:&nbsp;()&nbsp;-&gt;&nbsp;Unit)&nbsp;{</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">10</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if(!verbose)&nbsp;return</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">11</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;f()</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">12</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">13</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">8</td>
+                <td class="line-number">14</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@JvmStatic</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">9</td>
+                <td class="line-number">15</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;main(args:&nbsp;Array&lt;String&gt;)&nbsp;{</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">10</td>
+                <td class="line-number">16</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PicocliRunner.run(Entrypoint::class.java,&nbsp;*args)</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">11</td>
+                <td class="line-number">17</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;files.forEach&nbsp;{</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">12</td>
+                <td class="line-number">18</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Styles.BOLD&nbsp;withColor&nbsp;Colors.MAGENTA).println("Processing&nbsp;file&nbsp;${it.absolutePath}&nbsp;..")</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">13</td>
+                <td class="line-number">19</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;output&nbsp;=&nbsp;ShellCommandExecutor(it,&nbsp;inputDirectory).execute()</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">14</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DifferenceParser(output).parse()</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">20</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;views&nbsp;=&nbsp;DifferenceParser(output).parse()</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">21</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DifferenceGenerator(views).generate(File("Test.html"))</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">15</td>
+                <td class="line-number">22</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Styles.BOLD&nbsp;withColor&nbsp;Colors.MAGENTA).println("Writing&nbsp;output&nbsp;file&nbsp;to&nbsp;${it.absolutePath}&nbsp;..")</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">16</td>
+                <td class="line-number">23</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">17</td>
+                <td class="line-number">24</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="comparison">
+        <h1>README.md (4b19a6f8dca690048c20c7050019b0b25d1a1e56)</h1>
+        <table>
+            <tbody>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">0</td>
+                <td class="line-number">0</td>
+                <td class="context">package&nbsp;com.github.ottx96</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">1</td>
+                <td class="line-number">1</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">2</td>
+                <td class="line-number"></td>
+                <td class="context">import&nbsp;com.github.ottx96.convert.DifferenceParser</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">2</td>
+                <td class="context">import&nbsp;com.github.ottx96.parse.DifferenceParser</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">3</td>
+                <td class="line-number">3</td>
+                <td class="context">import&nbsp;com.github.ottx96.logging.Colors</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">4</td>
+                <td class="line-number">4</td>
+                <td class="context">import&nbsp;com.github.ottx96.logging.Styles</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">5</td>
+                <td class="line-number">5</td>
+                <td class="context">import&nbsp;com.github.ottx96.system.ShellCommandExecutor</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">6</td>
+                <td class="line-number">6</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;output&nbsp;=&nbsp;ShellCommandExecutor(it,&nbsp;inputDirectory).execute()</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">7</td>
+                <td class="line-number">7</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DifferenceParser(output).parse()</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">8</td>
+                <td class="line-number">8</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Styles.BOLD&nbsp;withColor&nbsp;Colors.MAGENTA).println("Writing&nbsp;output&nbsp;file&nbsp;to&nbsp;${it.absolutePath}&nbsp;..")</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">9</td>
+                <td class="line-number"></td>
+                <td class="context">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;TODO
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">10</td>
+                <td class="line-number">9</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">11</td>
+                <td class="line-number">10</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">12</td>
+                <td class="line-number">11</td>
+                <td class="context">}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="comparison">
+        <h1>README.md (4b19a6f8dca690048c20c7050019b0b25d1a1e56)</h1>
+        <table>
+            <tbody>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">0</td>
+                <td class="line-number">0</td>
+                <td class="context">package&nbsp;com.github.ottx96</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">1</td>
+                <td class="line-number">1</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">2</td>
+                <td class="context">import&nbsp;com.github.ottx96.convert.DifferenceParser</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">2</td>
+                <td class="line-number">3</td>
+                <td class="context">import&nbsp;com.github.ottx96.logging.Colors</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">3</td>
+                <td class="line-number">4</td>
+                <td class="context">import&nbsp;com.github.ottx96.logging.Styles</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">4</td>
+                <td class="line-number">5</td>
+                <td class="context">import&nbsp;com.github.ottx96.system.ShellCommandExecutor</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">5</td>
+                <td class="line-number">6</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.println("Hello,&nbsp;Formatted&nbsp;World!")</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">6</td>
+                <td class="line-number">7</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">7</td>
+                <td class="line-number">8</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;files.forEach&nbsp;{</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">8</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(ShellCommandExecutor(inputDirectory,&nbsp;it).execute())</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">9</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Styles.BOLD&nbsp;withColor&nbsp;Colors.MAGENTA).println("Processing&nbsp;file&nbsp;${it.absolutePath}&nbsp;..")</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">10</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;output&nbsp;=&nbsp;ShellCommandExecutor(it,&nbsp;inputDirectory).execute()</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">11</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DifferenceParser(output).parse()</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">12</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Styles.BOLD&nbsp;withColor&nbsp;Colors.MAGENTA).println("Writing&nbsp;output&nbsp;file&nbsp;to&nbsp;${it.absolutePath}&nbsp;..")</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">13</td>
+                <td class="context">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;TODO
+                </td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">9</td>
+                <td class="line-number">14</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">10</td>
+                <td class="line-number">15</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">11</td>
+                <td class="line-number">16</td>
+                <td class="context">}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="comparison">
+        <h1>README.md (4b19a6f8dca690048c20c7050019b0b25d1a1e56)</h1>
+        <table>
+            <tbody>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">0</td>
+                <td class="line-number">0</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">1</td>
+                <td class="line-number">1</td>
+                <td class="context">import&nbsp;com.github.ottx96.logging.Colors</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">2</td>
+                <td class="line-number">2</td>
+                <td class="context">import&nbsp;com.github.ottx96.logging.Styles</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">3</td>
+                <td class="context">import&nbsp;com.github.ottx96.system.ShellCommandExecutor</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">3</td>
+                <td class="line-number">4</td>
+                <td class="context">import&nbsp;io.micronaut.configuration.picocli.PicocliRunner</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">4</td>
+                <td class="line-number">5</td>
+                <td class="context">import&nbsp;picocli.CommandLine.*</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">5</td>
+                <td class="line-number">6</td>
+                <td class="context">import&nbsp;java.io.File</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">6</td>
+                <td class="line-number">7</td>
+                <td class="context">)</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">7</td>
+                <td class="line-number">8</td>
+                <td class="context">class&nbsp;Entrypoint&nbsp;:&nbsp;Runnable&nbsp;{</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">8</td>
+                <td class="line-number">9</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">9</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;@Option(names&nbsp;=&nbsp;["-v",&nbsp;"--verbose"],&nbsp;description&nbsp;=&nbsp;["Sets&nbsp;the&nbsp;output&nbsp;to&nbsp;verbose."])</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">10</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;var&nbsp;verbose:&nbsp;Boolean&nbsp;=&nbsp;false</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">10</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;companion&nbsp;object&nbsp;{</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">11</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@Option(names&nbsp;=&nbsp;["-v",&nbsp;"--verbose"],&nbsp;description&nbsp;=&nbsp;["Sets&nbsp;the&nbsp;output&nbsp;to&nbsp;verbose."])</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">12</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var&nbsp;verbose:&nbsp;Boolean&nbsp;=&nbsp;false</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">13</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">14</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@JvmStatic</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">15</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;main(args:&nbsp;Array&lt;String&gt;)&nbsp;{</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">16</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PicocliRunner.run(Entrypoint::class.java,&nbsp;*args)</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">17</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">18</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">11</td>
+                <td class="line-number">19</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">12</td>
+                <td class="line-number">20</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;@Option(names&nbsp;=&nbsp;["-d",&nbsp;"--directory-in"],&nbsp;description&nbsp;=&nbsp;["Sets&nbsp;the&nbsp;directory&nbsp;root&nbsp;to&nbsp;read&nbsp;from.",&nbsp;"Has&nbsp;to&nbsp;be&nbsp;inside&nbsp;of&nbsp;a&nbsp;valid&nbsp;git&nbsp;repository."],</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">13</td>
+                <td class="line-number">21</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showDefaultValue&nbsp;=&nbsp;Help.Visibility.ALWAYS,&nbsp;defaultValue&nbsp;=&nbsp;"",</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">14</td>
+                <td class="line-number">22</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;override&nbsp;fun&nbsp;run()&nbsp;{</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">15</td>
+                <td class="line-number">23</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Styles.BOLD&nbsp;withStyle&nbsp;Styles.UNDERLINE&nbsp;withStyle&nbsp;Styles.REVERSE&nbsp;withColor&nbsp;Colors.GREEN)</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">16</td>
+                <td class="line-number">24</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.println("Hello,&nbsp;Formatted&nbsp;World!")</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">17</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">18</td>
+                <td class="line-number">25</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">19</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;companion&nbsp;object&nbsp;{</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">20</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@JvmStatic</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">21</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;main(args:&nbsp;Array&lt;String&gt;)&nbsp;{</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">22</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PicocliRunner.run(Entrypoint::class.java,&nbsp;*args)</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">26</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;files.forEach&nbsp;{</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">27</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(ShellCommandExecutor(inputDirectory,&nbsp;it).execute())</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">23</td>
+                <td class="line-number">28</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">24</td>
+                <td class="line-number">29</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">25</td>
+                <td class="line-number">30</td>
+                <td class="context">}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="comparison">
+        <h1>README.md (4b19a6f8dca690048c20c7050019b0b25d1a1e56)</h1>
+        <table>
+            <tbody>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">0</td>
+                <td class="line-number">0</td>
+                <td class="context">package&nbsp;com.github.ottx96</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">1</td>
+                <td class="line-number">1</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">2</td>
+                <td class="context">import&nbsp;com.github.ottx96.logging.Colors</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">3</td>
+                <td class="context">import&nbsp;com.github.ottx96.logging.Styles</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">2</td>
+                <td class="line-number">4</td>
+                <td class="context">import&nbsp;io.micronaut.configuration.picocli.PicocliRunner</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">3</td>
+                <td class="line-number"></td>
+                <td class="context">import&nbsp;picocli.CommandLine.Command</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">4</td>
+                <td class="line-number"></td>
+                <td class="context">import&nbsp;picocli.CommandLine.Help.Ansi</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">5</td>
+                <td class="line-number"></td>
+                <td class="context">import&nbsp;picocli.CommandLine.Option</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">5</td>
+                <td class="context">import&nbsp;picocli.CommandLine.*</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">6</td>
+                <td class="context">import&nbsp;java.io.File</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">6</td>
+                <td class="line-number">7</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">7</td>
+                <td class="line-number">8</td>
+                <td class="context">@Command(</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">8</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;"diffview-git",&nbsp;description&nbsp;=&nbsp;["..."],</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">9</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;"diffview",</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">9</td>
+                <td class="line-number">10</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;mixinStandardHelpOptions&nbsp;=&nbsp;true</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">10</td>
+                <td class="line-number">11</td>
+                <td class="context">)</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">11</td>
+                <td class="line-number">12</td>
+                <td class="context">class&nbsp;Entrypoint&nbsp;:&nbsp;Runnable&nbsp;{</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">12</td>
+                <td class="line-number">13</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">13</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;@Option(names&nbsp;=&nbsp;["-v",&nbsp;"--verbose"],&nbsp;description&nbsp;=&nbsp;["..."])</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">14</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;@Option(names&nbsp;=&nbsp;["-v",&nbsp;"--verbose"],&nbsp;description&nbsp;=&nbsp;["Sets&nbsp;the&nbsp;output&nbsp;to&nbsp;verbose."])</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">14</td>
+                <td class="line-number">15</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;var&nbsp;verbose:&nbsp;Boolean&nbsp;=&nbsp;false</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">15</td>
+                <td class="line-number">16</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">17</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;@Option(names&nbsp;=&nbsp;["-d",&nbsp;"--directory-in"],&nbsp;description&nbsp;=&nbsp;["Sets&nbsp;the&nbsp;directory&nbsp;root&nbsp;to&nbsp;read&nbsp;from.",&nbsp;"Has&nbsp;to&nbsp;be&nbsp;inside&nbsp;of&nbsp;a&nbsp;valid&nbsp;git&nbsp;repository."],</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">18</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showDefaultValue&nbsp;=&nbsp;Help.Visibility.ALWAYS,&nbsp;defaultValue&nbsp;=&nbsp;"",</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">19</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arity&nbsp;=&nbsp;"0..1")</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">20</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;lateinit&nbsp;var&nbsp;inputDirectory:&nbsp;File</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">21</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">22</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;@Option(names&nbsp;=&nbsp;["-o",&nbsp;"--directory-out"],&nbsp;description&nbsp;=&nbsp;["Sets&nbsp;the&nbsp;directory&nbsp;to&nbsp;output&nbsp;.html&nbsp;files&nbsp;to.",&nbsp;"Files&nbsp;wll&nbsp;be&nbsp;created&nbsp;as&nbsp;[file&nbsp;name].html",&nbsp;"e.g.:&nbsp;README.md.html"],</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">23</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;showDefaultValue&nbsp;=&nbsp;Help.Visibility.ALWAYS,&nbsp;defaultValue&nbsp;=&nbsp;"diffview-generated/",</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">24</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;arity&nbsp;=&nbsp;"0..1")</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">25</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;lateinit&nbsp;var&nbsp;outputDirectory:&nbsp;File</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">26</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">27</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;@Parameters(index&nbsp;=&nbsp;"0",&nbsp;description&nbsp;=&nbsp;["The&nbsp;file&nbsp;whose&nbsp;history/diffviews&nbsp;to&nbsp;generate."],&nbsp;arity&nbsp;=&nbsp;"1..*")</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">28</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;lateinit&nbsp;var&nbsp;files:&nbsp;List&lt;File&gt;</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">29</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">16</td>
+                <td class="line-number">30</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;override&nbsp;fun&nbsp;run()&nbsp;{</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">17</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;str:&nbsp;String&nbsp;=&nbsp;Ansi.ON.string("@|bold,green,underline&nbsp;Hello,&nbsp;colored&nbsp;world!|@")</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">18</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(str)</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">31</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;(Styles.BOLD&nbsp;withStyle&nbsp;Styles.UNDERLINE&nbsp;withStyle&nbsp;Styles.REVERSE&nbsp;withColor&nbsp;Colors.GREEN)</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">32</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.println("Hello,&nbsp;Formatted&nbsp;World!")</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">19</td>
+                <td class="line-number">33</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">20</td>
+                <td class="line-number">34</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">21</td>
+                <td class="line-number">35</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;companion&nbsp;object&nbsp;{</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="comparison">
+        <h1>README.md (4b19a6f8dca690048c20c7050019b0b25d1a1e56)</h1>
+        <table>
+            <tbody>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">0</td>
+                <td class="line-number">0</td>
+                <td class="context">package&nbsp;com.github.ottx96</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">1</td>
+                <td class="line-number">1</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">2</td>
+                <td class="line-number">2</td>
+                <td class="context">import&nbsp;io.micronaut.configuration.picocli.PicocliRunner</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">3</td>
+                <td class="line-number"></td>
+                <td class="context">import&nbsp;io.micronaut.context.ApplicationContext</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">4</td>
+                <td class="line-number"></td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">5</td>
+                <td class="line-number"></td>
+                <td class="context">import&nbsp;picocli.CommandLine</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">6</td>
+                <td class="line-number">3</td>
+                <td class="context">import&nbsp;picocli.CommandLine.Command</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">4</td>
+                <td class="context">import&nbsp;picocli.CommandLine.Help.Ansi</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">7</td>
+                <td class="line-number">5</td>
+                <td class="context">import&nbsp;picocli.CommandLine.Option</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">8</td>
+                <td class="line-number"></td>
+                <td class="context">import&nbsp;picocli.CommandLine.Parameters</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">9</td>
+                <td class="line-number">6</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">10</td>
+                <td class="line-number">7</td>
+                <td class="context">@Command(</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">11</td>
+                <td class="line-number">8</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;"diffview-git",&nbsp;description&nbsp;=&nbsp;["..."],</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">12</td>
+                <td class="line-number">9</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;mixinStandardHelpOptions&nbsp;=&nbsp;true</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">13</td>
+                <td class="line-number">10</td>
+                <td class="context">)</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">14</td>
+                <td class="line-number"></td>
+                <td class="context">class&nbsp;DiffviewGitCommand&nbsp;:&nbsp;Runnable&nbsp;{</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">11</td>
+                <td class="context">class&nbsp;Entrypoint&nbsp;:&nbsp;Runnable&nbsp;{</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">15</td>
+                <td class="line-number">12</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">16</td>
+                <td class="line-number">13</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;@Option(names&nbsp;=&nbsp;["-v",&nbsp;"--verbose"],&nbsp;description&nbsp;=&nbsp;["..."])</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">17</td>
+                <td class="line-number">14</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;var&nbsp;verbose:&nbsp;Boolean&nbsp;=&nbsp;false</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">18</td>
+                <td class="line-number">15</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">19</td>
+                <td class="line-number">16</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;override&nbsp;fun&nbsp;run()&nbsp;{</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">20</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;business&nbsp;logic&nbsp;here</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">21</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(verbose)&nbsp;{</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">22</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println("Hi!")</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">23</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">17</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;val&nbsp;str:&nbsp;String&nbsp;=&nbsp;Ansi.ON.string("@|bold,green,underline&nbsp;Hello,&nbsp;colored&nbsp;world!|@")</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">18</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println(str)</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">24</td>
+                <td class="line-number">19</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">25</td>
+                <td class="line-number">20</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">26</td>
+                <td class="line-number">21</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;companion&nbsp;object&nbsp;{</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">27</td>
+                <td class="line-number">22</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@JvmStatic</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">28</td>
+                <td class="line-number">23</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;main(args:&nbsp;Array&lt;String&gt;)&nbsp;{</td>
+            </tr>
+            <tr class="row-removed">
+                <td class="line-icon">🔴</td>
+                <td class="line-number">29</td>
+                <td class="line-number"></td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PicocliRunner.run(DiffviewGitCommand::class.java,&nbsp;*args)</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">24</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PicocliRunner.run(Entrypoint::class.java,&nbsp;*args)</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">30</td>
+                <td class="line-number">25</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">31</td>
+                <td class="line-number">26</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row">
+                <td class="line-icon">⚪</td>
+                <td class="line-number">32</td>
+                <td class="line-number">27</td>
+                <td class="context">}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="comparison">
+        <h1>README.md (4b19a6f8dca690048c20c7050019b0b25d1a1e56)</h1>
+        <table>
+            <tbody>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">0</td>
+                <td class="context">package&nbsp;com.github.ottx96</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">1</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">2</td>
+                <td class="context">import&nbsp;io.micronaut.configuration.picocli.PicocliRunner</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">3</td>
+                <td class="context">import&nbsp;io.micronaut.context.ApplicationContext</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">4</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">5</td>
+                <td class="context">import&nbsp;picocli.CommandLine</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">6</td>
+                <td class="context">import&nbsp;picocli.CommandLine.Command</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">7</td>
+                <td class="context">import&nbsp;picocli.CommandLine.Option</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">8</td>
+                <td class="context">import&nbsp;picocli.CommandLine.Parameters</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">9</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">10</td>
+                <td class="context">@Command(</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">11</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;name&nbsp;=&nbsp;"diffview-git",&nbsp;description&nbsp;=&nbsp;["..."],</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">12</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;mixinStandardHelpOptions&nbsp;=&nbsp;true</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">13</td>
+                <td class="context">)</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">14</td>
+                <td class="context">class&nbsp;DiffviewGitCommand&nbsp;:&nbsp;Runnable&nbsp;{</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">15</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">16</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;@Option(names&nbsp;=&nbsp;["-v",&nbsp;"--verbose"],&nbsp;description&nbsp;=&nbsp;["..."])</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">17</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;private&nbsp;var&nbsp;verbose:&nbsp;Boolean&nbsp;=&nbsp;false</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">18</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">19</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;override&nbsp;fun&nbsp;run()&nbsp;{</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">20</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//&nbsp;business&nbsp;logic&nbsp;here</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">21</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if&nbsp;(verbose)&nbsp;{</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">22</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;println("Hi!")</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">23</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">24</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">25</td>
+                <td class="context"></td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">26</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;companion&nbsp;object&nbsp;{</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">27</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;@JvmStatic</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">28</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fun&nbsp;main(args:&nbsp;Array&lt;String&gt;)&nbsp;{</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">29</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PicocliRunner.run(DiffviewGitCommand::class.java,&nbsp;*args)</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">30</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">31</td>
+                <td class="context">&nbsp;&nbsp;&nbsp;&nbsp;}</td>
+            </tr>
+            <tr class="row-created">
+                <td class="line-icon">🟢</td>
+                <td class="line-number"></td>
+                <td class="line-number">32</td>
+                <td class="context">}</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
