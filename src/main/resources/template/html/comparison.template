@@ -1,5 +1,5 @@
 <div class="comparison">
-    <h1>@@file.name@@</h1>
+    <h1>@@file.name@@ (@@file.commit@@)</h1>
     <table>
         <tbody>
             @@rows.start@@

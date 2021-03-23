@@ -1,17 +1,14 @@
 package com.github.ottx96.parse
 
-import com.github.ottx96.Entrypoint
+import com.github.ottx96.Entrypoint.Companion.verbose
 import com.github.ottx96.logging.Colors
 import com.github.ottx96.logging.Styles
 
 class DifferenceParser(private val input: String) {
 
-    private fun verbose(f: () -> Unit) {
-        if(!Entrypoint.verbose) return
-        f()
-    }
+    fun parse(): List<DifferenceView> {
+        val result = mutableListOf<DifferenceView>()
 
-    fun parse() {
         val entries = input.split(Regex("commit [a-z0-9]+\n")).filter { it.isNotBlank() }
         (Styles.BOLD withColor Colors.MAGENTA).println("Processing ${entries.size} entries..")
         entries.forEach { commit ->
@@ -43,7 +40,9 @@ class DifferenceParser(private val input: String) {
             verbose {
                 println(differenceView)
             }
+            result += differenceView
         }
+        return result
     }
 
     private fun determineNegativeRange(rangeString: String): IntRange {

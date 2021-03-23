@@ -1,5 +1,6 @@
 package com.github.ottx96
 
+import com.github.ottx96.generate.DifferenceGenerator
 import com.github.ottx96.parse.DifferenceParser
 import com.github.ottx96.logging.Colors
 import com.github.ottx96.logging.Styles
@@ -17,6 +18,11 @@ class Entrypoint : Runnable {
     companion object {
         @Option(names = ["-v", "--verbose"], description = ["Sets the output to verbose."])
         var verbose: Boolean = false
+
+        fun verbose(f: () -> Unit) {
+            if(!verbose) return
+            f()
+        }
 
         @JvmStatic
         fun main(args: Array<String>) {
@@ -44,7 +50,8 @@ class Entrypoint : Runnable {
         files.forEach {
             (Styles.BOLD withColor Colors.MAGENTA).println("Processing file ${it.absolutePath} ..")
             val output = ShellCommandExecutor(it, inputDirectory).execute()
-            DifferenceParser(output).parse()
+            val views = DifferenceParser(output).parse()
+            DifferenceGenerator(views).generate(File("Test.html"))
             (Styles.BOLD withColor Colors.MAGENTA).println("Writing output file to ${it.absolutePath} ..")
         }
     }
