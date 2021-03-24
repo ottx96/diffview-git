@@ -1,6 +1,7 @@
 package com.github.ottx96
 
-import com.github.ottx96.convert.DifferenceParser
+import com.github.ottx96.generate.DifferenceGenerator
+import com.github.ottx96.parse.DifferenceParser
 import com.github.ottx96.logging.Colors
 import com.github.ottx96.logging.Styles
 import com.github.ottx96.system.ShellCommandExecutor
@@ -17,6 +18,17 @@ class Entrypoint : Runnable {
     companion object {
         @Option(names = ["-v", "--verbose"], description = ["Sets the output to verbose."])
         var verbose: Boolean = false
+        @Option(names = ["--debug"], description = ["Sets the output to debug."])
+        var debug: Boolean = false
+
+        fun verbose(func: () -> Unit) {
+            if(!verbose && !debug) return
+            func()
+        }
+        fun debug(func: () -> Unit) {
+            if(!debug) return
+            func()
+        }
 
         @JvmStatic
         fun main(args: Array<String>) {
@@ -44,9 +56,9 @@ class Entrypoint : Runnable {
         files.forEach {
             (Styles.BOLD withColor Colors.MAGENTA).println("Processing file ${it.absolutePath} ..")
             val output = ShellCommandExecutor(it, inputDirectory).execute()
-            DifferenceParser(output).parse()
+            val views = DifferenceParser(it.relativeTo(inputDirectory).toString().replace('\\', '/'), output).parse()
+            DifferenceGenerator(views).generate(File("Test.html"))
             (Styles.BOLD withColor Colors.MAGENTA).println("Writing output file to ${it.absolutePath} ..")
-            // TODO
         }
     }
 }

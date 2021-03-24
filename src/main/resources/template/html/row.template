@@ -1,0 +1,6 @@
+<tr class="@@line.class@@">
+    <td class="line-icon">@@line.icon@@</td>
+    <td class="line-number">@@line.number.old@@</td>
+    <td class="line-number">@@line.number.new@@</td>
+    <td class="context">@@line.content@@</td>
+</tr>
