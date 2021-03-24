@@ -13,7 +13,8 @@ So you can directly see the formatted diff locally.
 
 ## Usage
 ```text
-Usage: diffview [-hvV] [--debug] [-d[=<inputDirectory>]] [-o
+Usage: diffview [-hvV] [--debug] [-d[=<inputDirectory>]]
+                [--no-original-extension[=<omitOriginalExtensions>]] [-o
                 [=<outputDirectory>]] <files>...
       <files>...   The file whose history/diffviews to generate.
   -d, --directory-in[=<inputDirectory>]
@@ -22,6 +23,11 @@ Usage: diffview [-hvV] [--debug] [-d[=<inputDirectory>]] [-o
                      Default:
       --debug      Sets the output to debug.
   -h, --help       Show this help message and exit.
+      --no-original-extension[=<omitOriginalExtensions>]
+                   Omits the original extension for output files.
+                   e.g.: README.md --> README.html instead of README.md.html
+                   or build.gradle --> build.html
+                     Default: false
   -o, --directory-out[=<outputDirectory>]
                    Sets the directory to output .html files to.
                    Files wll be created as [file name].html
