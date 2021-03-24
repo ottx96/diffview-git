@@ -96,8 +96,11 @@ class DifferenceGenerator(val data: MutableList<DifferenceView>) {
                 })
         }
 
-
         // create html
+        if(!output.exists()) {
+            output.parentFile.mkdirs()
+            output.createNewFile()
+        }
         output.writer().use {
             it.write(htmlTemplate.replace("@@comparisons.start@@", comparisons.joinToString(separator = "\n")))
         }
