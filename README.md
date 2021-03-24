@@ -67,15 +67,15 @@ Example:
 If you want to create the Binaries from Source, here you go!  
 
 #### Build using Java
-run `gradlew assemble` inside of the repository.  
+Run `gradlew assemble` inside of the repository.  
 This will generate the Libraries (.jar) insiddde of the `build/` folder.
 
 #### Build as Native Image (GraalVM)
-after compiling the libraries (.jar), you can use GraalVM's native-image tool to generate a native image.  
-run `native-image -cp "application.jar:libs/*.jar:resources/*" com.github.ottx96.Entrypoint` inside of the folder `build/layers`.
+After compiling the libraries (.jar), you can use GraalVM's native-image tool to generate a native image.  
+Run `native-image -cp "application.jar:libs/*.jar:resources/*" com.github.ottx96.Entrypoint` inside of the folder `build/layers`.
 
 #### Build using Docker
-run `docker build -t "diffview:latest" .` or `gradlew buildDockerImage` inside of the repository.
+Run `docker build -t "diffview:latest" .` or `gradlew buildDockerImage` inside of the repository.
 
 ## Roadmap
 - [ ] Add Paramter to limit the count of commits to display
