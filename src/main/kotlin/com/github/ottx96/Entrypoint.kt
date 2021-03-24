@@ -36,6 +36,12 @@ class Entrypoint : Runnable {
         }
     }
 
+    @Option(names = ["--no-original-extension"], description = ["Omits the original extension for output files.", "e.g.: README.md --> README.html instead of README.md.html", "or build.gradle --> build.html"],
+        showDefaultValue = Help.Visibility.ALWAYS, defaultValue = "false",
+        arity = "0..1")
+    var omitOriginalExtensions: Boolean = false
+
+
     @Option(names = ["-d", "--directory-in"], description = ["Sets the directory root to read from.", "Has to be inside of a valid git repository."],
         showDefaultValue = Help.Visibility.ALWAYS, defaultValue = "",
         arity = "0..1")
@@ -50,15 +56,24 @@ class Entrypoint : Runnable {
     lateinit var files: List<File>
 
     override fun run() {
-        (Styles.BOLD withStyle Styles.UNDERLINE withStyle Styles.REVERSE withColor Colors.GREEN)
-            .println("Hello, Formatted World!")
-
         files.forEach {
+            outputDirectory.mkdirs()
+            verbose {
+                (Styles.ITALIC withColor Colors.BLUE).println("""
+                    Debug: $debug
+                    Verbose: $verbose
+                    Input directory: ${inputDirectory.absolutePath}
+                    Output directory: ${outputDirectory.absolutePath}
+                    Files: ${files.joinToString()}
+                """.trimIndent())
+            }
             (Styles.BOLD withColor Colors.MAGENTA).println("Processing file ${it.absolutePath} ..")
             val output = ShellCommandExecutor(it, inputDirectory).execute()
             val views = DifferenceParser(it.relativeTo(inputDirectory).toString().replace('\\', '/'), output).parse()
-            DifferenceGenerator(views).generate(File("Test.html"))
-            (Styles.BOLD withColor Colors.MAGENTA).println("Writing output file to ${it.absolutePath} ..")
+            val target = File("${outputDirectory.absolutePath}/${if(omitOriginalExtensions)it.nameWithoutExtension else it}.html")
+            (Styles.BOLD withColor Colors.MAGENTA).println("Writing output file to ${target.absolutePath} ..")
+            DifferenceGenerator(views).generate(target)
         }
+        (Styles.BOLD withColor Colors.GREEN).println("Everything finished! Exiting ..")
     }
 }
