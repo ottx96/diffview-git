@@ -63,6 +63,9 @@ Example:
 Example:   
 `java -jar doffview-git.jar -v README.md`
 
+## Preview
+![image](https://user-images.githubusercontent.com/49874532/112372681-62052780-8ce0-11eb-80e2-bf4b953b6633.png)
+
 ## Building from Source
 If you want to create the Binaries from Source, here you go!  
 
