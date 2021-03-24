@@ -19,7 +19,7 @@ class EntrypointTest {
         val args = arrayOf("README.md")
         PicocliRunner.run(Entrypoint::class.java, ctx, *args)
 
-        Assertions.assertTrue(baos.toString().contains(Regex("""Hello, Formatted World!""")))
+        Assertions.assertTrue(baos.toString().contains(Regex("""Everything finished! Exiting ..""")))
 
         ctx.close()
     }
