@@ -56,17 +56,18 @@ class Entrypoint : Runnable {
     lateinit var files: List<File>
 
     override fun run() {
-        files.forEach {
-            outputDirectory.mkdirs()
-            verbose {
-                (Styles.ITALIC withColor Colors.BLUE).println("""
+        outputDirectory.mkdirs()
+        verbose {
+            (Styles.ITALIC withColor Colors.BLUE).println("""
                     Debug: $debug
                     Verbose: $verbose
                     Input directory: ${inputDirectory.absolutePath}
                     Output directory: ${outputDirectory.absolutePath}
                     Files: ${files.joinToString()}
                 """.trimIndent())
-            }
+        }
+
+        files.forEach {
             (Styles.BOLD withColor Colors.MAGENTA).println("Processing file ${it.absolutePath} ..")
             val output = ShellCommandExecutor(it, inputDirectory).execute()
             val views = DifferenceParser(it.relativeTo(inputDirectory).toString().replace('\\', '/'), output).parse()
@@ -74,6 +75,7 @@ class Entrypoint : Runnable {
             (Styles.BOLD withColor Colors.MAGENTA).println("Writing output file to ${target.absolutePath} ..")
             DifferenceGenerator(views).generate(target)
         }
+
         (Styles.BOLD withColor Colors.GREEN).println("Everything finished! Exiting ..")
     }
 }
