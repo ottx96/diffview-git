@@ -10,7 +10,6 @@ So you can directly see the formatted diff locally.
 [![Native Image](https://github.com/ottx96/diffview-git/actions/workflows/native-image.yml/badge.svg)](https://github.com/ottx96/diffview-git/actions/workflows/native-image.yml)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=ottx96/diffview-git)](https://dependabot.com)
 
-
 ## Usage
 ```text
 Usage: diffview [-hvV] [--debug] [-d[=<inputDirectory>]]
@@ -37,22 +36,49 @@ Usage: diffview [-hvV] [--debug] [-d[=<inputDirectory>]]
   -V, --version    Print version information and exit.
 ```
 
-### Convert to html using java
-Run the following command inside of a git repository.  
-`java -jar diffview-git.jar [file..]`
+## Using the Program
+Run the following commands inside of a git repository.  
 
-### Convert to html using Docker
+#### Using Native Image (preferred)
+`diffview [-hvV] [--debug] [-d[=<inputDirectory>]]
+                [--no-original-extension[=<omitOriginalExtensions>]] [-o
+                [=<outputDirectory>]] <files>...`  
 
-#### Build the Container
-`docker build -t "diffview:latest" .`  
-or  
-`gradlew buildDockerImage`
+Example:  
+`diffview -v README.md`
 
-#### Run the Container
-`docker run --rm -v "[path/to/repo]:/git" diffview [..arguments]`
+#### Using Docker
+`docker run --rm -v "[path/to/repo]:/git" diffview [-hvV] [--debug] [-d[=<inputDirectory>]]
+                [--no-original-extension[=<omitOriginalExtensions>]] [-o
+                [=<outputDirectory>]] <files>...`
 
 Example:    
-`docker run --rm -v "$(pwd):/git" diffview README.md src/main/resources/logback.xml`
+`docker run --rm -v "$(pwd):/git" diffview -v README.md`
+
+#### Using Java
+`java -jar diffview-git.jar [-hvV] [--debug] [-d[=<inputDirectory>]]
+                [--no-original-extension[=<omitOriginalExtensions>]] [-o
+                [=<outputDirectory>]] <files>...`  
+                
+Example:   
+`java -jar doffview-git.jar -v README.md`
+
+## Preview
+![image](https://user-images.githubusercontent.com/49874532/112373883-bceb4e80-8ce1-11eb-946f-f65cc3075a85.png)
+
+## Building from Source
+If you want to create the Binaries from Source, here you go!  
+
+#### Build using Java
+Run `gradlew assemble` inside of the repository.  
+This will generate the Libraries (.jar) insiddde of the `build/` folder.
+
+#### Build as Native Image (GraalVM)
+After compiling the libraries (.jar), you can use GraalVM's native-image tool to generate a native image.  
+Run `native-image -cp "application.jar:libs/*.jar:resources/*" com.github.ottx96.Entrypoint` inside of the folder `build/layers`.
+
+#### Build using Docker
+Run `docker build -t "diffview:latest" .` or `gradlew buildDockerImage` inside of the repository.
 
 ## Roadmap
 - [ ] Add Paramter to limit the count of commits to display
