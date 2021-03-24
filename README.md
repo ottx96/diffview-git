@@ -43,6 +43,7 @@ Run the following commands inside of a git repository.
 `diffview [-hvV] [--debug] [-d[=<inputDirectory>]]
                 [--no-original-extension[=<omitOriginalExtensions>]] [-o
                 [=<outputDirectory>]] <files>...`  
+
 Example:  
 `diffview -v README.md`
 
