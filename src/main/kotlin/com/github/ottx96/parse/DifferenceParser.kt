@@ -12,35 +12,44 @@ class DifferenceParser(private val input: String) {
         val entries = input.split(Regex("commit [a-z0-9]+\n")).filter { it.isNotBlank() }
         (Styles.BOLD withColor Colors.MAGENTA).println("Processing ${entries.size} entries..")
         entries.forEach { commit ->
-            val lines = commit.lines().dropWhile { !it.matches(Regex("""@@ -\d{1}.*\d{1}.*@@.*""")) }
+            var lines = commit.lines().dropWhile { !it.matches(Regex("""@@ -\d.*\d.*@@.*""")) }
             // @@ from-file-range to-file-range @@ [header]
-            var hunkID = lines[0]
-            lines.drop(1)
-            verbose{ (Styles.ITALIC withColor Colors.WHITE).println("Processing hunk identifier: $hunkID") }
-            hunkID = hunkID.replace("@@ ", "").replace(" @@", "") // "-1,9 +1,15"
 
-            verbose {(Styles.ITALIC withColor Colors.WHITE).println("Negative range: ${determineNegativeRange(hunkID)}, Positive range: ${determinePositiveRange(hunkID)}")}
-            val negativeHunk = DifferenceView.FileHunk(determineNegativeRange(hunkID))
-            val positiveHunk = DifferenceView.FileHunk(determinePositiveRange(hunkID))
+            do {
+                var hunkID = lines[0]
+                lines = lines.drop(1)
 
-            // Populate Lines
-            lines.forEachIndexed { i, string ->
-                when {
-                    string.startsWith("-") -> negativeHunk.lines += DifferenceView.FileHunk.IdentifiableLine(i, true, string.substring(1))
-                    string.startsWith("+") -> positiveHunk.lines += DifferenceView.FileHunk.IdentifiableLine(i, true, string.substring(1))
-                    string.startsWith(" ") -> {
-                        negativeHunk.lines += DifferenceView.FileHunk.IdentifiableLine(i, false, string.substring(1))
-                        positiveHunk.lines += DifferenceView.FileHunk.IdentifiableLine(i, false, string.substring(1))
+                verbose{ (Styles.ITALIC withColor Colors.WHITE).println("Processing hunk identifier: $hunkID") }
+                hunkID = hunkID.replace("@@ ", "").replace(" @@", "") // "-1,9 +1,15"
+
+                verbose {(Styles.ITALIC withColor Colors.WHITE).println("Negative range: ${determineNegativeRange(hunkID)}, Positive range: ${determinePositiveRange(hunkID)}")}
+                val negativeHunk = DifferenceView.FileHunk(determineNegativeRange(hunkID))
+                val positiveHunk = DifferenceView.FileHunk(determinePositiveRange(hunkID))
+
+                val nextHunk = lines.indexOfFirst { it.matches(Regex("""@@ -\d.*\d.*@@.*""")) }
+                verbose {
+                    (Styles.ITALIC withColor Colors.WHITE).println("Next hunk at line: $nextHunk")
+                }
+
+                val divider = if(nextHunk > 0) nextHunk else lines.size
+                lines.subList(0, divider).forEachIndexed { i, string ->
+                    when {
+                        string.startsWith("-") -> negativeHunk.lines += DifferenceView.FileHunk.IdentifiableLine(i, true, string.substring(1))
+                        string.startsWith("+") -> positiveHunk.lines += DifferenceView.FileHunk.IdentifiableLine(i, true, string.substring(1))
+                        string.startsWith(" ") -> {
+                            negativeHunk.lines += DifferenceView.FileHunk.IdentifiableLine(i, false, string.substring(1))
+                            positiveHunk.lines += DifferenceView.FileHunk.IdentifiableLine(i, false, string.substring(1))
+                        }
                     }
                 }
-            }
+                lines = lines.drop(divider)
+                val differenceView = DifferenceView("4b19a6f8dca690048c20c7050019b0b25d1a1e56", "README.md", negativeHunk, positiveHunk)
+                verbose {
+                    println(differenceView)
+                }
+                result += differenceView
 
-            val differenceView = DifferenceView("4b19a6f8dca690048c20c7050019b0b25d1a1e56", "README.md", negativeHunk, positiveHunk)
-
-            verbose {
-                println(differenceView)
-            }
-            result += differenceView
+            } while(lines.isNotEmpty())
         }
         return result
     }

@@ -57,7 +57,7 @@ class DifferenceGenerator(val data: List<DifferenceView>) {
             // create rows for comparison
             val tableRows = mutableListOf<String>()
 
-            it.unified.toSortedMap().forEach{ (idx, data) ->
+            it.unified.toSortedMap().forEach{ (_, data) ->
                 val new = it.new.lines.find { it.index == data.index }
                 val old = it.old.lines.find { it.index == data.index }
                 val type = if(new?.marked == true) RowType.ADDED else if(old?.marked == true) RowType.REMOVED else RowType.NEUTRAL
@@ -65,14 +65,12 @@ class DifferenceGenerator(val data: List<DifferenceView>) {
                 tableRows += rowTemplate
                     .replace("@@line.class@@", type.classname)
                     .replace("@@line.icon@@", type.icon)
-                    .replace("@@line.number.old@@", it.old.lines.getLineNumber(data))
-                    .replace("@@line.number.new@@", it.new.lines.getLineNumber(data))
+                    .replace("@@line.number.old@@", it.old.getLineNumber(data))
+                    .replace("@@line.number.new@@", it.new.getLineNumber(data))
                     .replace("@@line.content@@",
-                "${data.value
-                            .replace(" ", "&nbsp;")
+                        data.value.replace(" ", "&nbsp;")
                             .replace("<", "&lt;")
                             .replace(">", "&gt;")
-                        }"
                     )
             }
 
@@ -90,9 +88,9 @@ class DifferenceGenerator(val data: List<DifferenceView>) {
         return output
     }
 
-    private fun List<DifferenceView.FileHunk.IdentifiableLine>.getLineNumber(other: DifferenceView.FileHunk.IdentifiableLine): String {
-        val i = indexOf(other)
-        return if(i == -1) "" else "$i"
+    private fun DifferenceView.FileHunk.getLineNumber(other: DifferenceView.FileHunk.IdentifiableLine): String {
+        val i = this.lines.indexOf(other)
+        return if(i == -1) "" else "${i + this.range.first}"
     }
 
 }
