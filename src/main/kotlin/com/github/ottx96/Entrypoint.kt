@@ -68,6 +68,10 @@ class Entrypoint : Runnable {
         }
 
         files.forEach {
+            if(it.isDirectory) {
+                (Styles.BOLD withColor Colors.RED).println("Skipping folder ${it.absolutePath}. Only files are allowed!")
+                return@forEach
+            }
             (Styles.BOLD withColor Colors.MAGENTA).println("Processing file ${it.absolutePath} ..")
             val output = ShellCommandExecutor(it, inputDirectory).execute()
             val views = DifferenceParser(it.relativeTo(inputDirectory).toString().replace('\\', '/'), output).parse()
