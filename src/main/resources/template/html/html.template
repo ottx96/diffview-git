@@ -2,7 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Test</title>
+    <title>Diffview (Git) by ottx96</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap" rel="stylesheet">
     <style>
         body {
             margin: 0;
@@ -24,8 +26,8 @@
         }
 
         .comparison {
-            padding-top: 5vh;
-            padding-bottom: 3vh;
+            padding-top: 3vh;
+            padding-bottom: 2vh;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -38,7 +40,7 @@
             margin-left: 6%;
             color: white;
             text-align: start;
-            font-family: 'Lucida Console', Courier, monospace
+            font-family: 'Montserrat', sans-serif;
         }
 
         table {
@@ -87,7 +89,7 @@
             background-color: rgba(255, 0, 0, 0.32);
         }
 
-        .line-number, .line-number-deleted, .line-number-added {
+        .line-number {
             color: #282c34;
             font-size: 0.7rem;
             width: 60px;

@@ -56,7 +56,7 @@ class Entrypoint : Runnable {
         files.forEach {
             (Styles.BOLD withColor Colors.MAGENTA).println("Processing file ${it.absolutePath} ..")
             val output = ShellCommandExecutor(it, inputDirectory).execute()
-            val views = DifferenceParser(output).parse()
+            val views = DifferenceParser(it.relativeTo(inputDirectory).toString().replace('\\', '/'), output).parse()
             DifferenceGenerator(views).generate(File("Test.html"))
             (Styles.BOLD withColor Colors.MAGENTA).println("Writing output file to ${it.absolutePath} ..")
         }

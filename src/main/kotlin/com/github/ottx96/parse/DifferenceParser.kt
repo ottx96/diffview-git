@@ -4,17 +4,19 @@ import com.github.ottx96.Entrypoint.Companion.verbose
 import com.github.ottx96.logging.Colors
 import com.github.ottx96.logging.Styles
 
-class DifferenceParser(private val input: String) {
+class DifferenceParser(private val name: String, private val input: String) {
 
-    fun parse(): List<DifferenceView> {
+    fun parse(): MutableList<DifferenceView> {
         val result = mutableListOf<DifferenceView>()
+        val commits = input.split('\n').filter { it.matches(Regex("""commit [a-z0-9]+$""")) }.toList()
+        verbose {
+            (Styles.ITALIC withColor Colors.WHITE).println("Found commits: $commits")
+        }
 
         val entries = input.split(Regex("commit [a-z0-9]+\n")).filter { it.isNotBlank() }
         (Styles.BOLD withColor Colors.MAGENTA).println("Processing ${entries.size} entries..")
-        entries.forEach { commit ->
+        entries.forEachIndexed { idx, commit ->
             var lines = commit.lines().dropWhile { !it.matches(Regex("""@@ -\d.*\d.*@@.*""")) }
-            // @@ from-file-range to-file-range @@ [header]
-
             do {
                 var hunkID = lines[0]
                 lines = lines.drop(1)
@@ -43,12 +45,11 @@ class DifferenceParser(private val input: String) {
                     }
                 }
                 lines = lines.drop(divider)
-                val differenceView = DifferenceView("4b19a6f8dca690048c20c7050019b0b25d1a1e56", "README.md", negativeHunk, positiveHunk)
+                val differenceView = DifferenceView(commits[idx], name, negativeHunk, positiveHunk)
                 verbose {
                     println(differenceView)
                 }
                 result += differenceView
-
             } while(lines.isNotEmpty())
         }
         return result
