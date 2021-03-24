@@ -10,9 +10,6 @@ So you can directly see the formatted diff locally.
 [![Native Image](https://github.com/ottx96/diffview-git/actions/workflows/native-image.yml/badge.svg)](https://github.com/ottx96/diffview-git/actions/workflows/native-image.yml)
 [![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=ottx96/diffview-git)](https://dependabot.com)
 
-## Preview
-![image](https://user-images.githubusercontent.com/49874532/112373883-bceb4e80-8ce1-11eb-946f-f65cc3075a85.png)
-
 ## Usage
 ```text
 Usage: diffview [-hvV] [--debug] [-d[=<inputDirectory>]]
@@ -65,6 +62,9 @@ Example:
                 
 Example:   
 `java -jar doffview-git.jar -v README.md`
+
+## Preview
+![image](https://user-images.githubusercontent.com/49874532/112373883-bceb4e80-8ce1-11eb-946f-f65cc3075a85.png)
 
 ## Building from Source
 If you want to create the Binaries from Source, here you go!  
