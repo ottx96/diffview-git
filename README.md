@@ -38,9 +38,6 @@ Usage: diffview [-hvV] [--debug] [-a[=<action>]] [--no-original-extension
                               Default:
   -v, --verbose             Sets the output to verbose.
   -V, --version             Print version information and exit.
-
-Process finished with exit code 0
-
 ```
 
 ## Using the Program
