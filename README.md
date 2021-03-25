@@ -1,7 +1,7 @@
 ## A simple `git diff` to html converter
 
 This Project is meant to be run as CLI Application.  
-I'll provide a `Dockerfile` to build your own images using [`GraalVM native images`](https://www.graalvm.org/).
+I'll provide a `Dockerfile` to build your own images using [GraalVM native images](https://www.graalvm.org/).
 
 Also, I'll provide another shellscript, which creates a container with a running webserver.  
 So you can directly see the formatted diff locally.
