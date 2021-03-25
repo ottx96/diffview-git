@@ -4,7 +4,7 @@ This Project is meant to be run as CLI Application.
 I'll provide a `Dockerfile` to build your own images using [GraalVM native images](https://www.graalvm.org/).
 
 Also, I'll provide another shellscript, which creates a container with a running webserver.  
-So you can directly see the formatted diff locally.
+This way, you can directly see the formatted diff locally.
 
 [![Gradle Build](https://github.com/ottx96/diffview-git/actions/workflows/shadow-jar.yml/badge.svg)](https://github.com/ottx96/diffview-git/actions/workflows/shadow-jar.yml)
 [![Native Image](https://github.com/ottx96/diffview-git/actions/workflows/native-image.yml/badge.svg)](https://github.com/ottx96/diffview-git/actions/workflows/native-image.yml)
@@ -12,14 +12,10 @@ So you can directly see the formatted diff locally.
 
 ## Usage
 ```text
-Usage: diffview [-hvV] [--debug] [-d[=<inputDirectory>]]
-                [--no-original-extension[=<omitOriginalExtensions>]] [-o
-                [=<outputDirectory>]] <files>...
+Usage: diffview [-hvV] [--debug] [--no-original-extension
+                [=<omitOriginalExtensions>]] [-o[=<outputDir>]] [-R
+                [=<repository>]] <files>...
       <files>...   The file whose history/diffviews to generate.
-  -d, --directory-in[=<inputDirectory>]
-                   Sets the directory root to read from.
-                   Has to be inside of a valid git repository.
-                     Default:
       --debug      Sets the output to debug.
   -h, --help       Show this help message and exit.
       --no-original-extension[=<omitOriginalExtensions>]
@@ -27,11 +23,15 @@ Usage: diffview [-hvV] [--debug] [-d[=<inputDirectory>]]
                    e.g.: README.md --> README.html instead of README.md.html
                    or build.gradle --> build.html
                      Default: false
-  -o, --directory-out[=<outputDirectory>]
+  -o, --directory-out[=<outputDir>]
                    Sets the directory to output .html files to.
                    Files wll be created as [file name].html
                    e.g.: README.md.html
                      Default: diffview-generated/
+  -R, --repository, --directory-in[=<repository>]
+                   Sets the directory root to read from.
+                   Has to be inside of a valid git repository.
+                     Default:
   -v, --verbose    Sets the output to verbose.
   -V, --version    Print version information and exit.
 ```

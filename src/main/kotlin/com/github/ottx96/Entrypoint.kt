@@ -41,41 +41,40 @@ class Entrypoint : Runnable {
         arity = "0..1")
     var omitOriginalExtensions: Boolean = false
 
-
-    @Option(names = ["-d", "--directory-in"], description = ["Sets the directory root to read from.", "Has to be inside of a valid git repository."],
+    @Option(names = ["-R", "--repository", "--directory-in"], description = ["Sets the directory root to read from.", "Has to be inside of a valid git repository."],
         showDefaultValue = Help.Visibility.ALWAYS, defaultValue = "",
         arity = "0..1")
-    lateinit var inputDirectory: File
+    lateinit var repository: File
 
     @Option(names = ["-o", "--directory-out"], description = ["Sets the directory to output .html files to.", "Files wll be created as [file name].html", "e.g.: README.md.html"],
         showDefaultValue = Help.Visibility.ALWAYS, defaultValue = "diffview-generated/",
         arity = "0..1")
-    lateinit var outputDirectory: File
+    lateinit var outputDir: File
 
     @Parameters(index = "0", description = ["The file whose history/diffviews to generate."], arity = "1..*")
     lateinit var files: List<File>
 
     override fun run() {
-        outputDirectory.mkdirs()
+        outputDir.mkdirs()
         verbose {
             (Styles.ITALIC withColor Colors.BLUE).println("""
                     Debug: $debug
                     Verbose: $verbose
-                    Input directory: ${inputDirectory.absolutePath}
-                    Output directory: ${outputDirectory.absolutePath}
+                    Input directory: ${repository.absolutePath}
+                    Output directory: ${outputDir.absolutePath}
                     Files: ${files.joinToString()}
                 """.trimIndent())
         }
 
-        files.forEach {
+        files.map { File("${repository.absolutePath}/$it") }.forEach {
             if(it.isDirectory) {
                 (Styles.BOLD withColor Colors.RED).println("Skipping folder ${it.absolutePath}. Only files are allowed!")
                 return@forEach
             }
             (Styles.BOLD withColor Colors.MAGENTA).println("Processing file ${it.absolutePath} ..")
-            val output = ShellCommandExecutor(it, inputDirectory).execute()
-            val views = DifferenceParser(it.relativeTo(inputDirectory).toString().replace('\\', '/'), output).parse()
-            val target = File("${outputDirectory.absolutePath}/${if(omitOriginalExtensions)it.nameWithoutExtension else it}.html")
+            val output = ShellCommandExecutor(it, repository).execute()
+            val views = DifferenceParser(it.toString().replace('\\', '/'), output).parse()
+            val target = File("${outputDir.absolutePath}/${if(omitOriginalExtensions)it.nameWithoutExtension else it.name}.html")
             (Styles.BOLD withColor Colors.MAGENTA).println("Writing output file to ${target.absolutePath} ..")
             DifferenceGenerator(views).generate(target)
         }
