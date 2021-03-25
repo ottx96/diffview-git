@@ -15,6 +15,8 @@ import java.io.File
 )
 class Entrypoint : Runnable {
 
+    enum class Action {LOG, DIFF}
+
     companion object {
         @Option(names = ["-v", "--verbose"], description = ["Sets the output to verbose."])
         var verbose: Boolean = false
@@ -35,6 +37,11 @@ class Entrypoint : Runnable {
             PicocliRunner.run(Entrypoint::class.java, *args)
         }
     }
+
+    @Option(names = ["-a", "--action"], description = ["Which action to execute.", "Possible values: (LOG|DIFF)"],
+        showDefaultValue = Help.Visibility.ALWAYS, defaultValue = "LOG",
+        arity = "0..1")
+    var action: Action = Action.LOG
 
     @Option(names = ["--no-original-extension"], description = ["Omits the original extension for output files.", "e.g.: README.md --> README.html instead of README.md.html", "or build.gradle --> build.html"],
         showDefaultValue = Help.Visibility.ALWAYS, defaultValue = "false",
@@ -60,25 +67,52 @@ class Entrypoint : Runnable {
             (Styles.ITALIC withColor Colors.BLUE).println("""
                     Debug: $debug
                     Verbose: $verbose
+                    Action: $action
                     Input directory: ${repository.absolutePath}
                     Output directory: ${outputDir.absolutePath}
                     Files: ${files.joinToString()}
                 """.trimIndent())
         }
 
-        files.map { File("${repository.absolutePath}/$it") }.forEach {
-            if(it.isDirectory) {
-                (Styles.BOLD withColor Colors.RED).println("Skipping folder ${it.absolutePath}. Only files are allowed!")
-                return@forEach
-            }
-            (Styles.BOLD withColor Colors.MAGENTA).println("Processing file ${it.absolutePath} ..")
-            val output = ShellCommandExecutor(it, repository).execute()
-            val views = DifferenceParser(it.toString().replace('\\', '/'), output).parse()
-            val target = File("${outputDir.absolutePath}/${if(omitOriginalExtensions)it.nameWithoutExtension else it.name}.html")
-            (Styles.BOLD withColor Colors.MAGENTA).println("Writing output file to ${target.absolutePath} ..")
-            DifferenceGenerator(views).generate(target)
+        when(action) {
+            Action.DIFF -> executeDiff()
+            Action.LOG -> executeLog()
         }
 
         (Styles.BOLD withColor Colors.GREEN).println("Everything finished! Exiting ..")
+    }
+
+    private fun executeDiff() {
+        if(files.size != 2 || checkDirectories()) {
+            (Styles.BOLD withColor Colors.RED).println("Please provide exactly 2 files!")
+            return
+        }
+        (Styles.BOLD withColor Colors.MAGENTA).println("Processing files ..")
+        val output = ShellCommandExecutor(files[1], repository, action, files[0]).execute()
+        val views = DifferenceParser(files[0].toString().replace('\\', '/'), output, action).parse()
+        val target = File("${outputDir.absolutePath}/${if (omitOriginalExtensions) files[0].nameWithoutExtension else files[0].name}.html")
+        (Styles.BOLD withColor Colors.MAGENTA).println("Writing output file to ${target.absolutePath} ..")
+        DifferenceGenerator(views).generate(target)
+    }
+
+    private fun executeLog() {
+        if(checkDirectories()) return
+        files.map { File("${repository.absolutePath}/$it") }.forEach {
+            (Styles.BOLD withColor Colors.MAGENTA).println("Processing file ${it.absolutePath} ..")
+            val output = ShellCommandExecutor(it, repository, action).execute()
+            val views = DifferenceParser(it.toString().replace('\\', '/'), output, action).parse()
+            val target =
+                File("${outputDir.absolutePath}/${if (omitOriginalExtensions) it.nameWithoutExtension else it.name}.html")
+            (Styles.BOLD withColor Colors.MAGENTA).println("Writing output file to ${target.absolutePath} ..")
+            DifferenceGenerator(views).generate(target)
+        }
+    }
+
+    private fun checkDirectories(): Boolean {
+        if(files.any { it.isDirectory }) {
+            (Styles.BOLD withColor Colors.RED).println("Please specify only files! Directories are not allowed.")
+            return true
+        }
+        return false
     }
 }

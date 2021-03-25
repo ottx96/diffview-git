@@ -1,19 +1,28 @@
 package com.github.ottx96.parse
 
+import com.github.ottx96.Entrypoint
 import com.github.ottx96.Entrypoint.Companion.verbose
 import com.github.ottx96.logging.Colors
 import com.github.ottx96.logging.Styles
 
-class DifferenceParser(private val name: String, private val input: String) {
+class DifferenceParser(private val name: String, private val input: String, private val action: Entrypoint.Action) {
 
     fun parse(): MutableList<DifferenceView> {
         val result = mutableListOf<DifferenceView>()
-        val commits = input.split('\n').filter { it.matches(Regex("""commit [a-z0-9]+$""")) }.toList()
+        val commits = input.split('\n').filter {
+            it.matches(when(action) {
+                Entrypoint.Action.DIFF -> Regex("index [a-z0-9].*[a-z0-9].*\\d+")
+                Entrypoint.Action.LOG -> Regex("commit [a-z0-9]+")
+            })
+        }.toList()
         verbose {
             (Styles.ITALIC withColor Colors.WHITE).println("Found commits: $commits")
         }
 
-        val entries = input.split(Regex("commit [a-z0-9]+\n")).filter { it.isNotBlank() }
+        val entries = input.split(when(action) {
+                Entrypoint.Action.LOG -> Regex("commit [a-z0-9]+\n")
+                Entrypoint.Action.DIFF -> Regex("index [a-z0-9]\\.\\.[a-z0-9].*\n")
+            }).filter { it.isNotBlank() }
         (Styles.BOLD withColor Colors.MAGENTA).println("Processing ${entries.size} entries..")
         entries.forEachIndexed { idx, commit ->
             var lines = commit.lines().dropWhile { !it.matches(Regex("""@@ -\d.*\d.*@@.*""")) }

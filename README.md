@@ -12,53 +12,60 @@ This way, you can directly see the formatted diff locally.
 
 ## Usage
 ```text
-Usage: diffview [-hvV] [--debug] [--no-original-extension
+Usage: diffview [-hvV] [--debug] [-a[=<action>]] [--no-original-extension
                 [=<omitOriginalExtensions>]] [-o[=<outputDir>]] [-R
                 [=<repository>]] <files>...
-      <files>...   The file whose history/diffviews to generate.
-      --debug      Sets the output to debug.
-  -h, --help       Show this help message and exit.
+      <files>...            The file whose history/diffviews to generate.
+  -a, --action[=<action>]   Which action to execute.
+                            Possible values: (LOG|DIFF)
+                              Default: LOG
+      --debug               Sets the output to debug.
+  -h, --help                Show this help message and exit.
       --no-original-extension[=<omitOriginalExtensions>]
-                   Omits the original extension for output files.
-                   e.g.: README.md --> README.html instead of README.md.html
-                   or build.gradle --> build.html
-                     Default: false
+                            Omits the original extension for output files.
+                            e.g.: README.md --> README.html instead of README.
+                              md.html
+                            or build.gradle --> build.html
+                              Default: false
   -o, --directory-out[=<outputDir>]
-                   Sets the directory to output .html files to.
-                   Files wll be created as [file name].html
-                   e.g.: README.md.html
-                     Default: diffview-generated/
+                            Sets the directory to output .html files to.
+                            Files wll be created as [file name].html
+                            e.g.: README.md.html
+                              Default: diffview-generated/
   -R, --repository, --directory-in[=<repository>]
-                   Sets the directory root to read from.
-                   Has to be inside of a valid git repository.
-                     Default:
-  -v, --verbose    Sets the output to verbose.
-  -V, --version    Print version information and exit.
+                            Sets the directory root to read from.
+                            Has to be inside of a valid git repository.
+                              Default:
+  -v, --verbose             Sets the output to verbose.
+  -V, --version             Print version information and exit.
+
+Process finished with exit code 0
+
 ```
 
 ## Using the Program
 Run the following commands inside of a git repository.  
 
 #### Using Native Image (preferred)
-`diffview [-hvV] [--debug] [-d[=<inputDirectory>]]
-                [--no-original-extension[=<omitOriginalExtensions>]] [-o
-                [=<outputDirectory>]] <files>...`  
+`diffview [-hvV] [--debug] [-a[=<action>]] [--no-original-extension
+        [=<omitOriginalExtensions>]] [-o[=<outputDir>]] [-R
+        [=<repository>]] <files>...`  
 
 Example:  
 `diffview -v README.md`
 
 #### Using Docker
-`docker run --rm -v "[path/to/repo]:/git" diffview [-hvV] [--debug] [-d[=<inputDirectory>]]
-                [--no-original-extension[=<omitOriginalExtensions>]] [-o
-                [=<outputDirectory>]] <files>...`
+`docker run --rm -v "[path/to/repo]:/git" diffview [-hvV] [--debug] [-a[=<action>]] [--no-original-extension
+        [=<omitOriginalExtensions>]] [-o[=<outputDir>]] [-R
+        [=<repository>]] <files>...`
 
 Example:    
 `docker run --rm -v "$(pwd):/git" diffview -v README.md`
 
 #### Using Java
-`java -jar diffview-git.jar [-hvV] [--debug] [-d[=<inputDirectory>]]
-                [--no-original-extension[=<omitOriginalExtensions>]] [-o
-                [=<outputDirectory>]] <files>...`  
+`java -jar diffview-git.jar [-hvV] [--debug] [-a[=<action>]] [--no-original-extension
+        [=<omitOriginalExtensions>]] [-o[=<outputDir>]] [-R
+        [=<repository>]] <files>...`  
                 
 Example:   
 `java -jar doffview-git.jar -v README.md`
