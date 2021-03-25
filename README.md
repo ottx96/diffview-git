@@ -40,25 +40,25 @@ Usage: diffview [-hvV] [--debug] [--no-original-extension
 Run the following commands inside of a git repository.  
 
 #### Using Native Image (preferred)
-`diffview [-hvV] [--debug] [-d[=<inputDirectory>]]
-                [--no-original-extension[=<omitOriginalExtensions>]] [-o
-                [=<outputDirectory>]] <files>...`  
+`diffview [-hvV] [--debug] [--no-original-extension
+        [=<omitOriginalExtensions>]] [-o[=<outputDir>]] [-R
+        [=<repository>]] <files>...`  
 
 Example:  
 `diffview -v README.md`
 
 #### Using Docker
-`docker run --rm -v "[path/to/repo]:/git" diffview [-hvV] [--debug] [-d[=<inputDirectory>]]
-                [--no-original-extension[=<omitOriginalExtensions>]] [-o
-                [=<outputDirectory>]] <files>...`
+`docker run --rm -v "[path/to/repo]:/git" diffview [-hvV] [--debug] [--no-original-extension
+        [=<omitOriginalExtensions>]] [-o[=<outputDir>]] [-R
+        [=<repository>]] <files>...`
 
 Example:    
 `docker run --rm -v "$(pwd):/git" diffview -v README.md`
 
 #### Using Java
-`java -jar diffview-git.jar [-hvV] [--debug] [-d[=<inputDirectory>]]
-                [--no-original-extension[=<omitOriginalExtensions>]] [-o
-                [=<outputDirectory>]] <files>...`  
+`java -jar diffview-git.jar [-hvV] [--debug] [--no-original-extension
+        [=<omitOriginalExtensions>]] [-o[=<outputDir>]] [-R
+        [=<repository>]] <files>...`  
                 
 Example:   
 `java -jar doffview-git.jar -v README.md`
