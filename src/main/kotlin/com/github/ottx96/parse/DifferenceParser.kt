@@ -18,6 +18,7 @@ class DifferenceParser(private val name: String, private val input: String) {
         entries.forEachIndexed { idx, commit ->
             var lines = commit.lines().dropWhile { !it.matches(Regex("""@@ -\d.*\d.*@@.*""")) }
             do {
+                if(lines.isEmpty()) continue
                 var hunkID = lines[0]
                 lines = lines.drop(1)
 

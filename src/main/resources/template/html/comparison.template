@@ -1,4 +1,0 @@
-<div class="comparison">
-    <h1>@@file.name@@ (@@file.commit@@)</h1>
-    @@tables.start@@
-</div>
