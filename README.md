@@ -88,4 +88,4 @@ Run `docker build -t "diffview:latest" .` or `gradlew buildDockerImage` inside o
 - [ ] Add parameter to limit the count of commits to display
 - [ ] Add parameter to enlargen the displayed length of the file
 - [ ] Directly serve the HTTP via web server (netty?) after converting the history
-- [ ] Add parameter to auto-stop the seb server (javascript / time limit)
+- [ ] Add parameter to auto-stop the web server (javascript / time limit)
