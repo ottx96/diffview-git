@@ -4,6 +4,7 @@ import com.github.ottx96.test.base.JUnitTestBase
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import java.io.File
 
 class EntrypointTest: JUnitTestBase() {
 
@@ -60,6 +61,28 @@ class EntrypointTest: JUnitTestBase() {
     fun `test parameter --action not given`() {
         val output = runApplication("--debug", "README.md")
         assertTrue(output.contains(Regex("""Action:[ ]+LOG""")))
+    }
+
+    @Test
+    fun testUsage() {
+        val output = runApplication("--help")
+        assertTrue {output.contains("Usage: ")}
+    }
+
+    @Test
+    fun `test parameter --directory-out`() {
+        val outputDir = File("build/test/dir-out/")
+        val output = runApplication("--debug", "--directory-out", outputDir.absolutePath, "README.md")
+        assertTrue { output.contains(outputDir.absolutePath) }
+        assertTrue { outputDir.exists() && outputDir.list()?.isNotEmpty()?:false }
+    }
+
+    @Test
+    fun `test parameter --directory-out missing`() {
+        val defaultOutputDir = File("diffview-generated")
+        val output = runApplication("--debug", "README.md")
+        assertTrue { output.contains("diffview-generated") }
+        assertTrue { defaultOutputDir.exists() && defaultOutputDir.list()?.isNotEmpty()?:false }
     }
 
 }
