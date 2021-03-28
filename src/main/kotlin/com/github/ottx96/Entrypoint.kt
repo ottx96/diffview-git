@@ -116,7 +116,7 @@ class Entrypoint : Runnable {
 
     private fun checkDirectories(): Boolean {
         if(files.any { it.isDirectory }) {
-            (Styles.BOLD withColor Colors.RED).println("Please specify only files! Directories are not allowed.")
+            (Styles.BOLD withColor Colors.RED).errorln("Please specify only files! Directories are not allowed.")
             return true
         }
         return false
