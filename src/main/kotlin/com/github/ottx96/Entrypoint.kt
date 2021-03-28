@@ -17,6 +17,11 @@ class Entrypoint : Runnable {
 
     enum class Action {LOG, DIFF}
 
+    init {
+        verbose = false
+        debug = false
+    }
+
     companion object {
         @Option(names = ["-v", "--verbose"], description = ["Sets the output to verbose."])
         var verbose: Boolean = false
@@ -27,6 +32,7 @@ class Entrypoint : Runnable {
             if(!verbose && !debug) return
             func()
         }
+
         fun debug(func: () -> Unit) {
             if(!debug) return
             func()
@@ -41,7 +47,7 @@ class Entrypoint : Runnable {
     @Option(names = ["-a", "--action"], description = ["Which action to execute.", "Possible values: (LOG|DIFF)"],
         showDefaultValue = Help.Visibility.ALWAYS, defaultValue = "LOG",
         arity = "0..1")
-    var action: Action = Action.LOG
+    lateinit var action: Action
 
     @Option(names = ["--no-original-extension"], description = ["Omits the original extension for output files.", "e.g.: README.md --> README.html instead of README.md.html", "or build.gradle --> build.html"],
         showDefaultValue = Help.Visibility.ALWAYS, defaultValue = "false",
@@ -84,7 +90,7 @@ class Entrypoint : Runnable {
 
     private fun executeDiff() {
         if(files.size != 2 || checkDirectories()) {
-            (Styles.BOLD withColor Colors.RED).println("Please provide exactly 2 files!")
+            (Styles.BOLD withColor Colors.RED).errorln("Please provide exactly 2 files!")
             return
         }
         (Styles.BOLD withColor Colors.MAGENTA).println("Processing files ..")
