@@ -85,4 +85,25 @@ class EntrypointTest: JUnitTestBase() {
         assertTrue { defaultOutputDir.exists() && defaultOutputDir.list()?.isNotEmpty()?:false }
     }
 
+    @Test
+    fun `test parameter --repository`() {
+        val repo = File(".")
+        val output = runApplication("--debug", "--repository", repo.absolutePath, "README.md")
+        assertTrue { output.contains(repo.absolutePath) }
+    }
+
+    @Test
+    fun `test parameter --no-original-extension`() {
+        val outputDir = File("build/test/out/")
+        runApplication("--debug", "--no-original-extension", "-o", outputDir.absolutePath, "README.md")
+        assertTrue { outputDir.listFiles()?.any { it.name == "README.html" }?:false }
+    }
+
+    @Test
+    fun `test parameter --no-original-extension missing`() {
+        val outputDir = File("build/test/out/")
+        runApplication("--debug", "-o", outputDir.absolutePath, "README.md")
+        assertTrue { outputDir.listFiles()?.any { it.name == "README.md.html" }?:false }
+    }
+
 }
