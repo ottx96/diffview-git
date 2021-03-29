@@ -11,19 +11,22 @@ class DifferenceParser(private val name: String, private val input: String, priv
         val result = mutableListOf<DifferenceView>()
         val commits = input.split('\n').filter {
             it.matches(when(action) {
-                Entrypoint.Action.DIFF -> Regex("index [a-z0-9].*[a-z0-9].*\\d+")
+                Entrypoint.Action.DIFF -> Regex("index [a-z0-9].*[a-z0-9].*\\d+.*")
                 Entrypoint.Action.LOG -> Regex("commit [a-z0-9]+")
             })
         }.toList()
+
         verbose {
             (Styles.ITALIC withColor Colors.WHITE).println("Found commits: $commits")
         }
 
         val entries = input.split(when(action) {
-                Entrypoint.Action.LOG -> Regex("commit [a-z0-9]+\n")
+                Entrypoint.Action.LOG -> Regex(".*commit [a-z0-9]+\n")
                 Entrypoint.Action.DIFF -> Regex("index [a-z0-9]\\.\\.[a-z0-9].*\n")
             }).filter { it.isNotBlank() }
+
         (Styles.BOLD withColor Colors.MAGENTA).println("Processing ${entries.size} entries..")
+
         entries.forEachIndexed { idx, commit ->
             var lines = commit.lines().dropWhile { !it.matches(Regex("""@@ -\d.*\d.*@@.*""")) }
             do {
