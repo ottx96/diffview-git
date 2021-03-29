@@ -45,4 +45,7 @@ data class OutputFormat(val style: OutputFormatStyle = OutputFormatStyle(), val 
     fun println(text: Any) {
         kotlin.io.println(format("$text"))
     }
+    fun errorln(text: Any) {
+        System.err.println(format("$text"))
+    }
 }
