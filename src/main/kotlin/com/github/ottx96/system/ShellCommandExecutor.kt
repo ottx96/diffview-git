@@ -1,6 +1,7 @@
 package com.github.ottx96.system
 
 import com.github.ottx96.Entrypoint
+import com.github.ottx96.Entrypoint.Companion.debug
 import com.github.ottx96.Entrypoint.Companion.verbose
 import com.github.ottx96.logging.Colors
 import com.github.ottx96.logging.Styles
@@ -40,7 +41,15 @@ class ShellCommandExecutor(private val file: File, private val directory: File, 
         if(err.length() > 0){
             (Styles.ITALIC withColor Colors.RED).println(err.readText())
         }
-        return out.readText()
+        val result = out.readText()
+
+        debug {
+            (Styles.ITALIC withColor Colors.WHITE).println("""--Command output--
+                |$result
+            """.trimMargin())
+        }
+
+        return result
     }
 
 }
