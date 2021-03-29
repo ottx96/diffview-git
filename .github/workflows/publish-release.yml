@@ -1,0 +1,42 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Publish Tagged Release
+
+# Controls when the action will run. 
+on:
+  push:
+    tags:
+      - "v*"
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ayltai/setup-graalvm@v1
+        with:
+          java-version: 11
+          graalvm-version: 21.0.0.2
+          native-image: true
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build with Gradle
+        run: ./gradlew assemble --info
+      - name: Build Native Image
+        run: |
+          java -version
+          native-image -cp "build/layers/libs/*.jar:build/layers/resources/*:build/layers/application.jar" com.github.ottx96.Entrypoint       
+          mv "com.github.ottx96.Entrypoint" "diffview-linux-amd64"
+      - uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            build/layers/diffview-linux-amd64
