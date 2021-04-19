@@ -4,6 +4,7 @@ import com.github.ottx96.generate.DifferenceGenerator
 import com.github.ottx96.parse.DifferenceParser
 import com.github.ottx96.logging.Colors
 import com.github.ottx96.logging.Styles
+import com.github.ottx96.parse.DifferenceView
 import com.github.ottx96.system.ShellCommandExecutor
 import io.micronaut.configuration.picocli.PicocliRunner
 import picocli.CommandLine.*
@@ -64,7 +65,7 @@ class Entrypoint : Runnable {
         arity = "0..1")
     lateinit var outputDir: File
 
-    @Parameters(index = "0", description = ["The file whose history/diffviews to generate."], arity = "1..*")
+    @Parameters(index = "0", description = ["The file(s) whose history/diffviews to generate."], arity = "1..*")
     lateinit var files: List<File>
 
     override fun run() {
@@ -89,13 +90,19 @@ class Entrypoint : Runnable {
     }
 
     private fun executeDiff() {
-        if(files.size != 2 || checkDirectories()) {
-            (Styles.BOLD withColor Colors.RED).errorln("Please provide exactly 2 files!")
+        if(files.size < 2 || checkDirectories()) {
+            (Styles.BOLD withColor Colors.RED).errorln("Please provide at least 2 files!")
             return
         }
         (Styles.BOLD withColor Colors.MAGENTA).println("Processing files ..")
-        val output = ShellCommandExecutor(files[1], repository, action, files[0]).execute()
-        val views = DifferenceParser(files[0].toString().replace('\\', '/'), output, action).parse()
+
+        val views = mutableListOf<DifferenceView>()
+        files.drop(1).forEach { file ->
+            (Styles.BOLD withColor Colors.MAGENTA).println("Processing file $file..")
+            val output = ShellCommandExecutor(files[0], repository, action, file).execute()
+            views += DifferenceParser("${files[0].toString().replace('\\', '/')}  ➡  ${file.toString().replace('\\', '/')}", output, action).parse()
+        }
+
         val target = File("${outputDir.absolutePath}/${if (omitOriginalExtensions) files[0].nameWithoutExtension else files[0].name}.html")
         (Styles.BOLD withColor Colors.MAGENTA).println("Writing output file to ${target.absolutePath} ..")
         DifferenceGenerator(views).generate(target)
