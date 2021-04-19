@@ -85,7 +85,6 @@ class DifferenceParser(private val name: String, private val input: String, priv
 }
 
 data class DifferenceView(val commit: String, val name: String, val old: FileHunk, val new: FileHunk, val unified:MutableMap<Int, FileHunk.IdentifiableLine> = mutableMapOf()) {
-
     init {
         old.lines.forEach { unified[it.index] = it }
         new.lines.forEach { unified[it.index] = it }
