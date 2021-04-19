@@ -99,7 +99,7 @@ class Entrypoint : Runnable {
         val views = mutableListOf<DifferenceView>()
         files.drop(1).forEach { file ->
             (Styles.BOLD withColor Colors.MAGENTA).println("Processing file $file..")
-            val output = ShellCommandExecutor(files[0], repository, action, file).execute()
+            val output = ShellCommandExecutor(file, repository, action, files[0]).execute()
             views += DifferenceParser("${files[0].toString().replace('\\', '/')}  ➡  ${file.toString().replace('\\', '/')}", output, action).parse()
         }
 
