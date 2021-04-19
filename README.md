@@ -15,7 +15,7 @@ This way, you can directly see the formatted diff locally.
 Usage: diffview [-hvV] [--debug] [-a[=<action>]] [--no-original-extension
                 [=<omitOriginalExtensions>]] [-o[=<outputDir>]] [-R
                 [=<repository>]] <files>...
-      <files>...            The file whose history/diffviews to generate.
+      <files>...            The file(s) whose history/diffviews to generate.
   -a, --action[=<action>]   Which action to execute.
                             Possible values: (LOG|DIFF)
                               Default: LOG
@@ -65,7 +65,7 @@ Example:
         [=<repository>]] <files>...`  
                 
 Example:   
-`java -jar doffview-git.jar -v README.md`
+`java -jar diffview-git.jar -v README.md`
 
 ## Preview
 ![image](https://user-images.githubusercontent.com/49874532/112373883-bceb4e80-8ce1-11eb-946f-f65cc3075a85.png)
