@@ -22,7 +22,7 @@ micronaut {
 }
 
 dependencies {
-    kapt("info.picocli:picocli-codegen:4.6.3")
+    kapt("info.picocli:picocli-codegen:4.7.0")
     compileOnly("org.graalvm.nativeimage:svm")
     implementation("io.micronaut:micronaut-validation")
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8:${kotlinVersion}")
